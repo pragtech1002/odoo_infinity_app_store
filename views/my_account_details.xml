@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="custom_portal_layout" inherit_id="portal.portal_my_home">
+            <xpath expr="//div[@class='o_portal_my_home']" position="inside">
+                <div class="o_portal_my_ssh_key oe_structure">
+                    <br></br>
+                    <span>
+                        <span style="">Github Account Name :</span>
+                        <p>
+                            <t t-esc="user_id.github_account_name"></t>
+                        </p>
+                    </span>
+
+                    <b>SSH Key :</b>
+                    <div class="rows">
+                        <div class="col-6">
+                            <input id="ssh-key-input" type="text" readonly="readonly"
+                                   t-att-value="user_id.public_ssh_key"/>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="ssh-key-container">
+                        <a class="copy-icon" title="Copy SSH Key">
+                            <i class="fa fa-copy"></i>&amp;nbsp; copy ssh key
+                        </a>&amp;nbsp;
+                        <a id="download-link" class="download-icon" title="Download SSH Key"
+                           download="public_ssh_key.txt">
+                            <i class="fa fa-download"></i>&amp;nbsp; download ssh key
+                        </a>
+                    </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </xpath>
+        </template>
+    </data>
+</odoo>

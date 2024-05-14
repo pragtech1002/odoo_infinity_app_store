@@ -34,12 +34,16 @@
         'views/repository_dashboard_template.xml',
         'views/my_apps_dashboard_template.xml',
         'views/view_app_template.xml',
+         'views/website_login.xml',
+        'views/inherite_res_user_form.xml',
+        'views/my_account_details.xml',
     ],
 
     'assets': {
         'web.assets_frontend': [
             '/odoo_infinity_app_store/static/src/js/my_dashboard.js',
             '/odoo_infinity_app_store/static/src/js/fetch_repo.js',
+             '/odoo_infinity_app_store/static/src/js/login_data.js',
             '/odoo_infinity_app_store/static/src/css/app_view_details.css',
         ],
     },

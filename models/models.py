@@ -6,6 +6,42 @@ from odoo import models, fields, api
 from odoo.exceptions import UserError
 import random
 import string
+import paramiko
+
+class ResUsers(models.Model):
+    _inherit = 'res.users'
+
+
+    public_ssh_key = fields.Char(string='Public SSH Key')
+    github_account_name=fields.Char(string='GitHub Account Name')
+
+
+    @staticmethod
+    def generate_ssh_keypair():
+        key_filename = 'my_ssh_key'  # Default key filename
+        passphrase = 'my_passphrase'  # Default passphrase, optional
+
+        key = paramiko.RSAKey.generate(2048)
+        # Save the private key to a file
+        key.write_private_key_file(key_filename, password=passphrase)
+        # Get the public key string
+        public_key_string = f"ssh-rsa {key.get_base64()}"
+        print('public_key_string----------------------',public_key_string)
+        # Append the public key to the private key file
+        with open(key_filename + '.pub', 'w') as pubkey_file:
+            pubkey_file.write(public_key_string)
+
+        print(
+            f"SSH key pair generated successfully. Private key: {key_filename}, Public key appended to the same file.")
+        return public_key_string  # Usage
+
+    @api.model
+    def create(self, values):
+        store_sshkey = self.generate_ssh_keypair()
+        print('store_sshkey--------------------', store_sshkey)
+        user = super(ResUsers, self).create(values)
+        user.write({'public_ssh_key': store_sshkey})
+        return user
 
 
 class SSHRepository(models.Model):

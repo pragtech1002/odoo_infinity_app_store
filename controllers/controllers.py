@@ -1,7 +1,8 @@
 import json
 from odoo import http
 from odoo.http import request, Response
-
+from odoo.addons.auth_signup.controllers.main import AuthSignupHome
+from werkzeug.exceptions import NotFound
 
 class DashboardController(http.Controller):
 
@@ -114,4 +115,40 @@ class DashboardController(http.Controller):
         app = request.env['github.repository.content'].sudo().browse(app_id)
         return request.render('odoo_infinity_app_store.view_app_template', {'app': app})
 
+class AuthSignupHome(http.Controller):
+
+    @http.route('/web/signup', type='http', auth='public', website=True ,csrf=False)
+    def web_auth_signup(self, **post):
+
+        return request.render('odoo_infinity_app_store.auth_signup_register_form',{})
+
+
+    @http.route('/web/signup/submit', type='json', auth='public', website=True, csrf=False)
+    def web_auth_signup_submit(self, **post):
+        # Retrieve user input from the form
+        name = post.get('name')
+        email = post.get('login')
+        password = post.get('password')
+        github_account_name = post.get('github_account_name')
+        print('github_account_name------------',github_account_name)
+
+        user_exists = request.env['res.users'].sudo().search([('login', '=', email)])
+
+        if user_exists:
+            return {'error': 'An employee with this email already exists.'}
+        else:
+            # ssh_key = request.env['res.users']
+            # print('ssh_key------------',ssh_key)
+            # public_ssh_key = self.generate_ssh_keypair()
+            # print('public_ssh_key-------------controller------',public_ssh_key)
+            new_user = request.env['res.users'].sudo().create({
+                'name': name,
+                'login': email,
+                'password': password,
+                'github_account_name': github_account_name,
+
+            })
+            print('new_user-----------------',new_user)
+
+            return {'success': True}
 
