@@ -146,6 +146,11 @@ class SSHRepository(models.Model):
         # app_odoo_versions = manifest_dict.get('version', '')
         app_website = manifest_dict.get('website', '')
         app_depends = manifest_dict.get('depends', '')
+        #
+        app_category = manifest_dict.get('category', '')
+        app_currency = manifest_dict.get('currency', '')
+        app_license = manifest_dict.get('license', '')
+
         return {
             'name': app_name,
             'description': app_description,
@@ -155,8 +160,10 @@ class SSHRepository(models.Model):
             'odoo_versions': app_odoo_versions,
             'website': app_website,
             'depends': app_depends,
+            'category': app_category,
+            'currency': app_currency,
+            'license': app_license,
         }
-
     @api.model
     def create(self, vals):
         try:

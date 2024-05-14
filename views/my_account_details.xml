@@ -13,25 +13,15 @@
                     </span>
 
                     <b>SSH Key :</b>
-                    <div class="rows">
-                        <div class="col-6">
-                            <input id="ssh-key-input" type="text" readonly="readonly"
-                                   t-att-value="user_id.public_ssh_key"/>
-                        </div>
-
-                        <div class="col-6">
-                            <div class="ssh-key-container">
-                        <a class="copy-icon" title="Copy SSH Key">
+                    <div class="ssh-key-container">
+                        <input id="ssh-key-input" type="text" class="input_ssh_border" readonly="readonly" t-att-value="user_id.public_ssh_key"/>
+                        <a class="copy-icon"  title="Copy SSH Key">
                             <i class="fa fa-copy"></i>&amp;nbsp; copy ssh key
                         </a>&amp;nbsp;
                         <a id="download-link" class="download-icon" title="Download SSH Key"
                            download="public_ssh_key.txt">
                             <i class="fa fa-download"></i>&amp;nbsp; download ssh key
                         </a>
-                    </div>
-
-                        </div>
-
                     </div>
 
 

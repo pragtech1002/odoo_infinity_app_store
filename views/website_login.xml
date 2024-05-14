@@ -5,29 +5,31 @@
             <xpath expr="//form[@class='oe_login_form']" position="inside">
                 <xpath expr="//div[@class='clearfix oe_login_buttons text-center gap-1 d-grid mb-1 {{'pt-2' if form_small else 'pt-3'}}']"
                        position="after">
-                    <a href="/web/signup">Register</a>
+                    <div class="custom-register">
+                        <a href="/web/signup" >Register Odoo Infinity</a>
+                    </div>
                 </xpath>
             </xpath>
         </template>
         <template id="auth_signup_register_form" inherit_id="auth_signup.signup" name="Sign up login">
             <xpath expr="//form[@class='oe_signup_form']" position="inside">
-<!--                 <xpath expr="//button[@class='btn']" position="replace">-->
-<!--                     <attribute name="onclick" id="submitbtn"></attribute>-->
-<!--                 </xpath>-->
+                <!--                 <xpath expr="//button[@class='btn']" position="replace">-->
+                <!--                     <attribute name="onclick" id="submitbtn"></attribute>-->
+                <!--                 </xpath>-->
             </xpath>
         </template>
 
 
-<template id="custom_auth_signup_fields" inherit_id="auth_signup.fields">
-    <xpath expr="//div[@class='mb-3 field-name']" position="after">
-        <!-- Add your additional field here -->
-        <div class="mb-3 field-git_account_name">
-            <label for="github_account_name">GitHub Account Name</label>
-            <input type="text" name="github_account_name" id="github_account_name" class="form-control form-control-sm" required="required"/>
-        </div>
-    </xpath>
-</template>
-
+        <template id="custom_auth_signup_fields" inherit_id="auth_signup.fields">
+            <xpath expr="//div[@class='mb-3 field-name']" position="after">
+                <!-- Add your additional field here -->
+                <div class="mb-3 field-git_account_name">
+                    <label for="github_account_name">GitHub Account Name</label>
+                    <input type="text" name="github_account_name" id="github_account_name"
+                           class="form-control form-control-sm" required="required"/>
+                </div>
+            </xpath>
+        </template>
 
 
     </data>

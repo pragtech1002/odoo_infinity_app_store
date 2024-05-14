@@ -36,14 +36,48 @@ margin-left: 20px;
   position: relative;
 }
 
+.app_icon_image{
+object-fit: cover;
+height: 100%;
+    width: 15%;
+}
+
+.bg-o-color-2{
+background-color: #017e84 !important;
+    color: #FFFFFF;
+}
+.loempia_tags{
+    letter-spacing: 0;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 0.75rem;
+    line-height: 1.5;
+}
+
+.loempia_tags .fa {
+    margin-left: 10px;
+    color: #017e84;
+}
+
+.loempia_tags .badge, .loempia_tags .label {
+    padding: 0.3em 0.8em;
+    font-size: 11px;
+}
 .input_ssh_url{
     border:none;
 
 }
+.input_ssh_border{
+border:none;
+}
 
-#ssh-key-input{
+.input_ssh_url{
 margin-right:50px
 }
-.copy-icon{
+#copyid{
 margin-right:20px
 }
+
+.oe_login_form .custom-register {
+        display: flex;
+        justify-content: center;
+    }
