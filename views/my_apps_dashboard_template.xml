@@ -1,0 +1,24 @@
+<odoo>
+    <data>
+        <!-- My Apps Template -->
+        <template id="my_apps_section" name="My Apps Section">
+            <t t-call="website.layout">
+                <div id="wrap" class="oe_structure oe_empty">
+                    <section class="my_apps_dashboard_section">
+                        <div class="container">
+                            <div class="my-apps-section">
+                                <div class="my-apps-header">
+                                    <h5 class="my-apps-title">My Apps</h5>
+                                </div>
+                                <div class="my-apps-body" id="my_apps_body">
+
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </t>
+        </template>
+
+    </data>
+</odoo>

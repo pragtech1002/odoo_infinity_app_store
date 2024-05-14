@@ -1,0 +1,13 @@
+<odoo>
+    <data>
+        <template id="my_account__dashboard_link" name="Dashboard Link to frontend portal"
+                  inherit_id="portal.user_dropdown">
+            <xpath expr="//*[@id='o_logout_divider']" position="before">
+                <a href="/my/dashboard" role="menuitem" class="dropdown-item">
+                    <i class="fa fa-dashboard"/>
+                    My Dashboard
+                </a>
+            </xpath>
+        </template>
+    </data>
+</odoo>

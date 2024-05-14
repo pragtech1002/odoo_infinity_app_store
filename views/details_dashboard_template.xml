@@ -1,0 +1,18 @@
+<odoo>
+    <data>
+        <!-- Details Template -->
+        <template id="details_section" name="Details Section">
+            <h1 class="mb-4">Welcome to Your Dashboard</h1>
+                <div class="card-header">
+                    <h5 class="card-title">Odoo Infinity App Store Module</h5>
+                </div>
+            <div class="card-body">
+                <p>
+                    <strong>SSH Key:</strong>
+                    <span class="ssh-key"></span>
+                </p>
+            </div>
+        </template>
+
+    </data>
+</odoo>

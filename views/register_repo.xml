@@ -1,0 +1,49 @@
+<odoo>
+    <data>
+        <template id="register_repo" name="Register Repositories">
+            <t t-call="website.layout">
+                <section class="mb32">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-2 mt4">
+                                <a href="/my/dashboard" class="btn btn-primary mt48">
+                                    <i class="fa fa-arrow-left"></i>
+                                    Back to Dashboard
+                                </a>
+                            </div>
+                            <div class="col-lg-10">
+                                <h1 class="display-3 mt48">
+                                    Submit your <b>Apps</b>
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="bg-400 mb32">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-8 offset-lg-2 mt32 mb32">
+                                <h3 class="mt0 mb16">Register your Git repository</h3>
+                                <div class="apps_repo_input">
+                                    <div class="input-group input-group-lg">
+                                        <input type="text" class="form-control" id="sshInput" name="url"
+                                               placeholder="ssh://git@github.com/odoo/odoo.git#8.0"/>
+                                        <button id="apps_submit_repo_button" class="btn btn-info" type="button">Submit
+                                        </button>
+                                    </div>
+                                </div>
+                                <p class="form-text text-muted">
+                                    The provided url should follow a standardized format:
+                                    ssh://git@github.com/odoo/odoo.git#8.0. The url of your repository might then be
+                                    modified in order to respect this standard.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </t>
+        </template>
+    </data>
+</odoo>
+

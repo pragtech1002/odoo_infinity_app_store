@@ -1,0 +1,46 @@
+<odoo>
+    <data>
+        <!-- Dashboard Template -->
+        <template id="dashboard_template" name="Dashboard Template">
+            <t t-call="website.layout">
+                <div id="wrap" class="oe_structure oe_empty">
+                    <section class="dashboard_section pt40 pb40">
+                        <div class="container d-flex">
+                            <!-- Left Side Menu -->
+                            <div class="bg-light border-end py-4 px-3 sidebar">
+                                <div class="d-grid gap-2">
+                                    <a href="#" class="btn text-start rounded-pill active" data-target="details-section"
+                                       data-url="/my/dashboard">
+                                        Details
+                                    </a>
+                                    <a href="#" class="btn text-start rounded-pill" data-target="repositories-section"
+                                       data-url="/my/dashboard/repositories">
+                                        Repositories
+                                    </a>
+                                    <!-- Updated link to point to the new URL -->
+                                    <a href="/my/apps/dashboard" class="btn text-start rounded-pill">
+                                        My Apps
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Main Content Area -->
+                            <div class="main-content flex-grow-1">
+                                <!-- Details Section -->
+                                <div id="details-section" class="section card">
+                                    <t t-call="odoo_infinity_app_store.details_section"/>
+                                </div>
+
+                                <!-- Repositories Section -->
+                                <div id="repositories-section" class="section card" style="display: none;">
+                                    <t t-call="odoo_infinity_app_store.repositories_section"/>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </t>
+        </template>
+
+    </data>
+</odoo>

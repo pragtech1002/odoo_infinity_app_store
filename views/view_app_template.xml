@@ -1,0 +1,348 @@
+<odoo>
+    <data>
+        <!-- view_app_template.xml -->
+        <template id="view_app_template">
+            <t t-call="website.layout">
+                <div class="container pt40 pd40">
+                    <t t-set="title">App Details</t>
+                    <div class="container apps_page">
+                        <div class="row">
+                            <!--                            App image Left Side-->
+                            <div class="col-md-7 col-xl-6 mb32">
+                                <div class="loempia_app_cover shadow-sm"></div>
+                            </div>
+
+                            <!--                            App Details Right side-->
+                            <div id="loempia_app_infos" class="col-md-5 col-xl-6 mb32 loempia_app_info_has_cover">
+                                <div class="d-flex">
+                                    <img itemprop="image" class="shadow-sm loempia_app_icon big"
+                                         src="//apps.odoocdn.com/web/image/loempia.module/174435/icon_image/84x84?unique=a459957"
+                                         loading="lazy"/>
+
+                                    <div class="loempia_app_title">
+                                        <h1 class="mt0 mb0 app_heading" itemprop="name">
+                                            <b>
+                                                <t t-esc="app.name"/>
+                                            </b>
+                                        </h1>
+                                        <small>by</small>
+                                        <a href="">
+                                            <t t-esc="app.company_name"/>
+                                        </a>
+                                        <!--                                    <a href="/apps/modules/browse?author=Emipro Technologies Pvt. Ltd.">-->
+                                        <!--                                        <span itemprop="author" itemscope="" itemtype="http://schema.org/Person">-->
+                                        <!--                                            <span itemprop="name">Emipro Technologies Pvt. Ltd.</span>-->
+                                        <!--                                            <span class="d-none" itemprop="url">http://www.emiprotechnologies.com/-->
+                                        <!--                                            </span>-->
+                                        <!--                                        </span>-->
+                                        <!--                                    </a>-->
+
+                                        <div class="mb4">
+                                            <!--                                        <span class="d-none" itemprop="operatingSystem">Odoo</span>-->
+                                            <!--                                        <span itemprop="aggregateRating" itemscope=""-->
+                                            <!--                                              itemtype="http://schema.org/AggregateRating">-->
+                                            <!--                                            <meta itemprop="ratingValue" content="4">-->
+                                            <!--                                            <meta itemprop="worstRating" content="1">-->
+                                            <!--                                            <meta itemprop="bestRating" content="5">-->
+                                            <!--                                            <meta itemprop="reviewCount" content="173">-->
+                                            <!--                                            <meta itemprop="ratingCount" content="70">-->
+                                            <!--                                        </span>-->
+                                            <a href="#loempia-comments">
+                                                <span class="loempia_rating_stars" title="70 votes">
+                                                    <span class="fa fa-star rating_star_active"></span>
+                                                    <span class="fa fa-star rating_star_active"></span>
+                                                    <span class="fa fa-star rating_star_active"></span>
+                                                    <span class="fa fa-star rating_star_active"></span>
+                                                    <span class="fa fa-star-o rating_star_active"></span>
+                                                    <b>
+                                                        <small>70</small>
+                                                    </b>
+                                                </span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="loempia_app_title ms-auto ps-3 text-end">
+
+                                        <h1 class="mt0 mb0">
+                                            <b>
+                                                <span class="oe_currency_value">
+                                                   $ <t t-esc="app.price"/>
+                                                </span>
+                                            </b>
+                                        </h1>
+                                    </div>
+                                </div>
+
+                                <div class="loempia_tags">
+
+                                    <span class="badge bg-o-color-2" itemprop="softwareVersion">
+                                        <b>
+                                            V
+                                            <t t-esc="app.odoo_versions"/>
+                                        </b>
+                                    </span>
+
+                                    <span>
+                                        <i class="fa fa-group"></i>
+                                        Third Party
+                                    </span>
+
+<!--                                    <span title="Purchases">-->
+<!--                                        <i class="fa fa-shopping-cart"></i>-->
+<!--                                        1239-->
+<!--                                    </span>-->
+
+
+                                </div>
+
+                                <form method="post" class="oe_import apps_buy_form"
+                                      action="https://www.odoo.com/shop/apps_cart_update">
+                                    <input class="js_module_id" type="hidden" value="174435"/>
+                                    <input class="js_product_price" type="hidden" value="379.0"/>
+
+
+                                    <input type="hidden" name="modules" value="[174435, 174434]"/>
+                                    <button id="buy_button" type="submit" class="btn btn-primary mb16 ">
+                                        <i class="fa fa-shopping-cart"></i>
+                                        Add to Cart
+                                    </button>
+
+
+                                    <input id="url_cart" type="hidden" value="https://www.odoo.com"/>
+                                    <a rel="nofollow" class="btn btn-primary mb16"
+                                       href="https://www.emiprotechnologies.com/r/DOh">
+                                        Purchase
+                                    </a>
+                                    <div id="js_login_alert" class="alert alert-info d-none mt8 mb0" role="alert">
+                                        Apps purchases are linked to your Odoo account, please <a class="alert-link"
+                                                                                                  href="/web/login?redirect=/apps/modules/17.0/shopify_ept">
+                                        sign in
+                                    </a> or <a class="alert-link" href="https://www.odoo.com/web/signup">sign up</a> first.
+                                    </div>
+                                </form>
+
+
+                                <div class="p-0 col-12 d-md-none d-lg-block detail_Section">
+                                    <table style="word-wrap: break-word;"
+                                           class="loempia_app_table table table-sm small mt16">
+                                        <thead class="alert-info">
+                                            <tr>
+                                                <td>
+                                                    <b>Availability</b>
+                                                </td>
+                                                <td>
+                                                    <div class="loempia_platform_availability w-100 d-flex">
+                                                        <div class="flex-grow-1">
+                                                            <i class="fa fa-times" style="color: red;"></i>
+                                                            <span>Odoo Online</span>
+                                                        </div>
+                                                        <div class="flex-grow-1">
+                                                            <i class="fa fa-check" style="color: green;"></i>
+                                                            Odoo.infinity
+                                                        </div>
+<!--                                                        <div class="flex-grow-1">-->
+<!--                                                            <i class="fa fa-check" style="color: green;"></i>-->
+<!--                                                            On Premise-->
+<!--                                                        </div>-->
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <b>Odoo Apps Dependencies</b>
+                                                    <a data-bs-toggle="popover"
+                                                       data-bs-content="This app requires some additional standard apps from Odoo to be installed.">
+                                                        <i class="fa fa-info-circle text-info" role="img"
+                                                           aria-label="Warning"></i>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <!-- Render app dependencies dynamically -->
+                                                    <t t-if="app.depends">
+                                                        <ul>
+                                                            <t t-set="dependencies"
+                                                               t-value="app.depends.replace('[', '').replace(']', '').replace('\'', '').split(', ')"/>
+                                                            <t t-foreach="dependencies" t-as="dependency">
+                                                                <li>
+                                                                    <t t-esc="dependency"/>
+                                                                </li>
+                                                            </t>
+                                                        </ul>
+                                                    </t>
+
+                                                    <!--                                                    •-->
+                                                    <!--                                                    <span>Sales (sale_management)</span>-->
+                                                    <!--                                                    <br/>-->
+                                                    <!--                                                    •-->
+                                                    <!--                                                    <span>Invoicing (account)</span>-->
+                                                    <!--                                                    <br/>-->
+                                                    <!--                                                    •-->
+                                                    <!--                                                    <span>Discuss (mail)</span>-->
+                                                    <!--                                                    <br/>-->
+                                                    <!--                                                    •-->
+                                                    <!--                                                    <span>Inventory (stock)</span>-->
+                                                    <!--                                                    <br/>-->
+                                                </td>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <b>Technical Name</b>
+                                                </td>
+                                                <td>
+                                                    <code>
+                                                        <t t-esc="app.technical_name"/>
+                                                    </code>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <b>Website</b>
+                                                </td>
+                                                <td>
+                                                    <a rel="nofollow" t-attf-href="{{ app.website }}" target="_blank">
+                                                        <t t-esc="app.website"/>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="loempia_app_availability">
+                                                    <b>Versions</b>
+                                                </td>
+                                                <td>
+                                                    <a>
+                                                        <span class="badge bg-primary mr8 ">
+                                                            17.0
+                                                        </span>
+                                                    </a>
+                                                    <a href="/apps/modules/16.0/shopify_ept">
+                                                        <span class="badge bg-secondary mr8">
+                                                            16.0
+                                                        </span>
+                                                    </a>
+                                                    <a href="/apps/modules/9.0/shopify_ept">
+                                                        <span class="badge bg-secondary mr8">
+                                                            9.0
+                                                        </span>
+                                                    </a>
+                                                    <a href="/apps/modules/8.0/shopify_ept">
+                                                        <span class="badge bg-secondary mr8">
+                                                            8.0
+                                                        </span>
+                                                    </a>
+                                                    <a href="/apps/modules/11.0/shopify_ept">
+                                                        <span class="badge bg-secondary mr8">
+                                                            11.0
+                                                        </span>
+                                                    </a>
+                                                    <a href="/apps/modules/12.0/shopify_ept">
+                                                        <span class="badge bg-secondary mr8">
+                                                            12.0
+                                                        </span>
+                                                    </a>
+                                                    <a href="/apps/modules/10.0/shopify_ept">
+                                                        <span class="badge bg-secondary mr8">
+                                                            10.0
+                                                        </span>
+                                                    </a>
+                                                    <a href="/apps/modules/13.0/shopify_ept">
+                                                        <span class="badge bg-secondary mr8">
+                                                            13.0
+                                                        </span>
+                                                    </a>
+                                                    <a href="/apps/modules/14.0/shopify_ept">
+                                                        <span class="badge bg-secondary mr8">
+                                                            14.0
+                                                        </span>
+                                                    </a>
+                                                    <a href="/apps/modules/15.0/shopify_ept">
+                                                        <span class="badge bg-secondary mr8">
+                                                            15.0
+                                                        </span>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <small class="text-muted mb16">
+                                    You bought this module and need <b>support</b>?
+                                    <a rel="nofollow" href="/apps/support/174435">
+                                        Click here!
+                                    </a>
+                                </small>
+                            </div>
+
+                            <!--                            Comments Box-->
+                            <section id="loempia-comments" class="mb48 loempia_comments">
+
+                                <div class="col-lg-8 offset-lg-2 mb32 css_editable_mode_hidden">
+                                    <h2 class="mt64 fw-light">
+                                        Comment on this module
+                                    </h2>
+                                    <div class="mb32">
+                                        <ul>
+                                            <li>The author can leave a single reply to each comment.</li>
+                                            <li>This section is meant to ask simple questions or leave a rating. Every
+                                                report of a problem experienced while using the module should be
+                                                addressed to the author directly (refer to the following point).
+                                            </li>
+                                            <li>
+                                                If you want to start a discussion with the author or have a question
+                                                related to your purchase, please use the <a href="/apps/support/174435">
+                                                support page</a>.
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <form id="comment" action="/apps/rating">
+                                        <div class="row">
+
+                                            <div class="col-12">
+                                                <textarea rows="1" name="subject" class="form-control mb8"
+                                                          placeholder="Write your overall feeling..."></textarea>
+                                                <input name="module_id" type="hidden" value="174435"/>
+                                                <div class="position-relative o_wysiwyg_textarea_wrapper">
+                                                    <div style="display: contents;"></div>
+                                                    <div style="display: contents;"></div>
+                                                    <div class="oe-absolute-container">
+                                                        <div class="oe-absolute-container"
+                                                             data-oe-absolute-container-id="oe-selections-container"></div>
+                                                        <div class="oe-absolute-container"
+                                                             data-oe-absolute-container-id="oe-avatars-container"></div>
+                                                        <div class="oe-absolute-container"
+                                                             data-oe-absolute-container-id="oe-avatars-counters-container"></div>
+                                                    </div>
+                                                    <div class="note-editable odoo-editor-editable"
+                                                         style="height: 200px; min-height: 80px;" dir="ltr"
+                                                         contenteditable="true">
+                                                        <p class="oe-hint oe-command-temporary-hint"
+                                                           placeholder="Type / for commands">
+                                                            <br/>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <button type="submit" id="post_button"
+                                                        class="btn btn-primary mt16 a-submit">Post
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </section>
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>
+
+
+        <!--<t t-esc="app.name"/>-->
