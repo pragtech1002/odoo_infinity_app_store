@@ -55,13 +55,9 @@ class SSHRepository(models.Model):
     def fetch_repository_content(self):
         try:
             parts = self.ssh_url.split(':')[-1].split('/')
-            print("=====parts=========",parts)
             username = parts[-2]
             repo_name = parts[-1].split('#')[0].replace('.git', '')
-            print("=====username=========",username)
-            print("=====repo_name=========",repo_name)
             branch = parts[-1].split('#')[1] if '#' in parts[-1] else 'master'
-            print("=====branch=========",branch)
 
             url = f"https://api.github.com/repos/{username}/{repo_name}/contents"
             response = requests.get(url, params={'ref': branch})
@@ -70,11 +66,8 @@ class SSHRepository(models.Model):
                 for content in contents:
                     if content['type'] == 'dir' and content['name'] != '__pycache__':
                         module_name = content['name']
-                        print("==========module_name==========", module_name)
                         icon_url = f"https://raw.githubusercontent.com/{username}/{repo_name}/{branch}/{module_name}/static/description/icon.png"
-                        print("==========icon_url=========",icon_url)
                         icon_response = requests.get(icon_url)
-                        print("==========icon_response=========",icon_response)
                         icon_path = None
                         if icon_response.status_code == 200:
                             icon_data = icon_response.content
@@ -90,6 +83,19 @@ class SSHRepository(models.Model):
 
                         manifest_url = f"https://raw.githubusercontent.com/{username}/{repo_name}/{branch}/{module_name}/__manifest__.py"
                         manifest_response = requests.get(manifest_url)
+                        index_html_url = f"https://raw.githubusercontent.com/{username}/{repo_name}/{branch}/{module_name}/static/description/index.html"
+                        index_html_response = requests.get(index_html_url)
+                        license_url = f"https://raw.githubusercontent.com/{username}/{repo_name}/{branch}/{module_name}/LICENSE"
+                        license_response = requests.get(license_url)
+
+                        index_html_content = None
+                        if index_html_response.status_code == 200:
+                            index_html_content = index_html_response.text
+
+                        license_text_content = None
+                        if license_response.status_code == 200:
+                            license_text_content = license_response.text
+
                         if manifest_response.status_code == 200:
                             manifest_data = manifest_response.text
                             app_data = self._parse_manifest(manifest_data)
@@ -102,15 +108,18 @@ class SSHRepository(models.Model):
                                 'odoo_versions': app_data['odoo_versions'],
                                 'website': app_data['website'],
                                 'depends': app_data['depends'],
+                                'category': app_data['category'],
+                                'currency': app_data['currency'],
+                                'license': app_data['license'],
                                 'repository_name': repo_name,
                                 'ssh_repository_id': self.id,
                                 'icon_image': icon_path,
+                                'index_html_content': index_html_content,  # Set index_html_content
+                                'license_text_content': license_text_content,  # Set license_text_content
                             }
-                            print("================Vals==================",vals)
                             existing_record = self.env['github.repository.content'].search(
                                 [('technical_name', '=', module_name)])
                             if existing_record:
-                                print("Record Is Already Exist")
                                 existing_record.write(vals)
                             else:
                                 self.env['github.repository.content'].create(vals)
@@ -119,7 +128,6 @@ class SSHRepository(models.Model):
                                 f"Failed to fetch manifest file for module {module_name} in repository {repo_name} (branch: {branch}).")
             else:
                 raise UserError(f"Failed to fetch contents for repository {repo_name} (branch: {branch}).")
-
         except Exception as e:
             print("Unexpected error:", str(e))
 
@@ -229,5 +237,11 @@ class RepositoryContent(models.Model):
     scanned = fields.Boolean(string="Scanned", default=False)
     website = fields.Char(string="website")
     depends = fields.Char(string="Depended Modules")
+    category = fields.Char(string="Category")
+    currency = fields.Char(string="Currency")
+    license = fields.Char(string="License")
+    index_html_content = fields.Text(string="Index HTML Content")
+    license_text_content = fields.Text(string="License Text Content")
+    img_files = fields.Binary(string="Images")
 
 

@@ -6,14 +6,34 @@
                 <div id="wrap" class="oe_structure oe_empty">
                     <section class="my_apps_dashboard_section">
                         <div class="container">
-                            <div class="my-apps-section">
-                                <div class="my-apps-header">
-                                    <h5 class="my-apps-title">My Apps</h5>
+                            <div class="row">
+                                <div class="col-lg-2 mt4">
+                                    <a href="/my/dashboard" class="btn btn-primary mt48">
+                                        <i class="fa fa-arrow-left"></i>
+                                        Back to Dashboard
+                                    </a>
                                 </div>
-                                <div class="my-apps-body" id="my_apps_body">
+                                <div class="col-lg-10">
+                                    <h5 class="display-4 mt48">
+                                        My
+                                        <b>Apps</b>
+                                    </h5>
 
                                 </div>
                             </div>
+                            <hr/>
+                            <div class="row">
+                                <div class="my-apps-body" id="my_apps_body">
+                                </div>
+                            </div>
+                            <!--                            <div class="my-apps-section">-->
+                            <!--                                <div class="my-apps-header">-->
+                            <!--                                    <h5 class="my-apps-title">My Apps</h5>-->
+                            <!--                                </div>-->
+                            <!--                                <div class="my-apps-body" id="my_apps_body">-->
+
+                            <!--                                </div>-->
+                            <!--                            </div>-->
                         </div>
                     </section>
                 </div>

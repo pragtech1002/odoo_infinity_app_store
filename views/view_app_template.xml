@@ -15,8 +15,8 @@
                             <!--                            App Details Right side-->
                             <div id="loempia_app_infos" class="col-md-5 col-xl-6 mb32 loempia_app_info_has_cover">
                                 <div class="d-flex">
-                                    <img itemprop="image" class="shadow-sm loempia_app_icon big"
-                                         src="//apps.odoocdn.com/web/image/loempia.module/174435/icon_image/84x84?unique=a459957"
+                                    <img itemprop="image" class="shadow-sm app_icon_image card-image"
+                                         t-att-src="app.icon_image"
                                          loading="lazy"/>
 
                                     <div class="loempia_app_title">
@@ -66,7 +66,8 @@
                                         <h1 class="mt0 mb0">
                                             <b>
                                                 <span class="oe_currency_value">
-                                                   $ <t t-esc="app.price"/>
+                                                    $
+                                                    <t t-esc="app.price"/>
                                                 </span>
                                             </b>
                                         </h1>
@@ -87,10 +88,10 @@
                                         Third Party
                                     </span>
 
-<!--                                    <span title="Purchases">-->
-<!--                                        <i class="fa fa-shopping-cart"></i>-->
-<!--                                        1239-->
-<!--                                    </span>-->
+                                    <!--                                    <span title="Purchases">-->
+                                    <!--                                        <i class="fa fa-shopping-cart"></i>-->
+                                    <!--                                        1239-->
+                                    <!--                                    </span>-->
 
 
                                 </div>
@@ -140,10 +141,10 @@
                                                             <i class="fa fa-check" style="color: green;"></i>
                                                             Odoo.infinity
                                                         </div>
-<!--                                                        <div class="flex-grow-1">-->
-<!--                                                            <i class="fa fa-check" style="color: green;"></i>-->
-<!--                                                            On Premise-->
-<!--                                                        </div>-->
+                                                        <!--                                                        <div class="flex-grow-1">-->
+                                                        <!--                                                            <i class="fa fa-check" style="color: green;"></i>-->
+                                                        <!--                                                            On Premise-->
+                                                        <!--                                                        </div>-->
                                                     </div>
                                                 </td>
                                             </tr>
@@ -194,6 +195,16 @@
                                                 <td>
                                                     <code>
                                                         <t t-esc="app.technical_name"/>
+                                                    </code>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <b>License</b>
+                                                </td>
+                                                <td>
+                                                    <code>
+                                                        <t t-esc="app.license"/>
                                                     </code>
                                                 </td>
                                             </tr>
@@ -274,6 +285,39 @@
                                     </a>
                                 </small>
                             </div>
+
+                            <!--                            Module Description -->
+                            <div id="module-description">
+                                <div id="loempia_tabs">
+                                    <ul role="tablist" class="nav nav-tabs justify-content-center" data-tabs="tabs">
+                                        <li class="nav-item">
+                                            <a href="#desc" class="nav-link active" data-bs-toggle="tab">Description</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#license" class="nav-link" data-bs-toggle="tab">License</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div id="loempia_tabs_content" class="tab-content">
+                                    <div id="desc" class="tab-pane active">
+                                        <div class="container">
+                                            <div class="html-content-section">
+<!--                                                <div t-raw="app.index_html_content"/>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="license" class="tab-pane">
+                                        <div class="container">
+                                            <div class="col-lg-8 offset-lg-2">
+                                                <pre class="mt8">
+                                                    <t t-raw="app.license_text_content"/>
+                                                </pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
 
                             <!--                            Comments Box-->
                             <section id="loempia-comments" class="mb48 loempia_comments">
