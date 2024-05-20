@@ -13,7 +13,8 @@
                             </div>
                             <div class="col-lg-10">
                                 <h1 class="display-3 mt48">
-                                    Submit your <b>Apps</b>
+                                    Submit your
+                                    <b>Apps</b>
                                 </h1>
                             </div>
                         </div>
@@ -32,6 +33,13 @@
                                         <button id="apps_submit_repo_button" class="btn btn-info" type="button">Submit
                                         </button>
                                     </div>
+
+                                    <div id="loading_gif" style="display: none; text-align: center;">
+                                        <img src="https://media.giphy.com/media/ZO9b1ntYVJmjZlsWlm/giphy.gif"
+                                             alt="Loading..." style="width: 100px; height: auto;"/>
+                                    </div>
+
+
                                 </div>
                                 <p class="form-text text-muted">
                                     The provided url should follow a standardized format:

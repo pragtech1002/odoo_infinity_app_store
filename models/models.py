@@ -11,11 +11,8 @@ import paramiko
 class ResUsers(models.Model):
     _inherit = 'res.users'
 
-
     public_ssh_key = fields.Char(string='Public SSH Key')
     github_account_name=fields.Char(string='GitHub Account Name')
-
-
     @staticmethod
     def generate_ssh_keypair():
         key_filename = 'my_ssh_key'  # Default key filename
@@ -50,7 +47,8 @@ class SSHRepository(models.Model):
 
     user_id = fields.Many2one('res.users', string='User', default=lambda self: self.env.user)
     ssh_url = fields.Char(string='SSH URL')
-    repository_content = fields.One2many('github.repository.content', 'ssh_repository_id', string="Repository Contents")
+    # repository_content = fields.One2many('github.repository.content', 'ssh_repository_id', string="Repository Contents")
+    repository_content = fields.One2many('product.template', 'ssh_repository_id', string="Repository Contents")
 
     def fetch_repository_content(self):
         try:
@@ -66,6 +64,23 @@ class SSHRepository(models.Model):
                 for content in contents:
                     if content['type'] == 'dir' and content['name'] != '__pycache__':
                         module_name = content['name']
+
+                        gif_url = f"https://raw.githubusercontent.com/{username}/{repo_name}/{branch}/{module_name}/static/description/{module_name}.gif"
+                        gif_response = requests.get(gif_url)
+                        gif_path = None
+                        if gif_response.status_code == 200:
+                            gif_data = gif_response.content
+                            gif_filename = f"{module_name}.gif"
+                            gif_attachment = self.env['ir.attachment'].create({
+                                'name': gif_filename,
+                                'type': 'binary',
+                                'datas': base64.b64encode(gif_data),
+                                'res_model': 'product.template',
+                                'res_id': self.id,
+                            })
+                            gif_path = f"/web/image/{gif_attachment.id}/gif_image"
+
+
                         icon_url = f"https://raw.githubusercontent.com/{username}/{repo_name}/{branch}/{module_name}/static/description/icon.png"
                         icon_response = requests.get(icon_url)
                         icon_path = None
@@ -76,7 +91,7 @@ class SSHRepository(models.Model):
                                 'name': icon_filename,
                                 'type': 'binary',
                                 'datas': base64.b64encode(icon_data),
-                                'res_model': 'github.repository.content',
+                                'res_model': 'product.template',
                                 'res_id': self.id,
                             })
                             icon_path = f"/web/image/{icon_attachment.id}/icon_image"
@@ -114,15 +129,16 @@ class SSHRepository(models.Model):
                                 'repository_name': repo_name,
                                 'ssh_repository_id': self.id,
                                 'icon_image': icon_path,
+                                'gif_image': gif_path,
                                 'index_html_content': index_html_content,  # Set index_html_content
-                                'license_text_content': license_text_content,  # Set license_text_content
+                                'license_text_content': license_text_content,# Set license_text_content
                             }
-                            existing_record = self.env['github.repository.content'].search(
+                            existing_record = self.env['product.template'].search(
                                 [('technical_name', '=', module_name)])
                             if existing_record:
                                 existing_record.write(vals)
                             else:
-                                self.env['github.repository.content'].create(vals)
+                                self.env['product.template'].create(vals)
                         else:
                             raise UserError(
                                 f"Failed to fetch manifest file for module {module_name} in repository {repo_name} (branch: {branch}).")
@@ -229,8 +245,8 @@ class SSHRepository(models.Model):
             raise e
 
 
-class RepositoryContent(models.Model):
-    _name = 'github.repository.content'
+class ProductProduct(models.Model):
+    _inherit = 'product.template'
 
     name = fields.Char(string='Name')
     description = fields.Text(string='Description')
@@ -241,6 +257,9 @@ class RepositoryContent(models.Model):
     repository_name = fields.Char(string='Repository Name')
     ssh_repository_id = fields.Many2one('ssh.repository', string="SSH Repository")
     icon_image = fields.Char(string="Icon Path")
+    #
+    gif_image = fields.Char(string="GIF Image Path")
+    #
     scanned = fields.Boolean(string="Scanned", default=False)
     website = fields.Char(string="website")
     depends = fields.Char(string="Depended Modules")
@@ -249,6 +268,3 @@ class RepositoryContent(models.Model):
     license = fields.Char(string="License")
     index_html_content = fields.Text(string="Index HTML Content")
     license_text_content = fields.Text(string="License Text Content")
-    img_files = fields.Binary(string="Images")
-
-

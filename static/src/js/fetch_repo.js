@@ -10,38 +10,18 @@ odoo.define('odoo_infinity_app_store.fetch_repo', function (require) {
         .then(function (response) {
             var scannedAppsData = response
             renderScannedApps(scannedAppsData);
-            console.log('---------------------Scanned App Data ---------------------',scannedAppsData)
-
         });
 
         function fetchModuleInfo(sshUrl, listItem, repoId) {
             ajax.jsonRpc("/fetch_repository_content", 'call', {
                 repo_id: repoId
             }).then(function (response) {
-             console.log('---------------------Fetch Repo---------------------',response)
-                alert("Apps Scan Successfully !!! ")
-
+                alert("Apps Scan Successfully !!! ");
             });
         }
 
-        function checkScanningStatus(repoId) {
-            ajax.jsonRpc("/get_scanning_status", 'GET', { repo_id: repoId })
-            .then(function(response) {
-                console.log('Response:', response); // Log the entire response object
-                if (response) { // Check if scanned property is true
-                    // Hide the draft button if the repository has been scanned
-                    $('.draft_btn').hide();
-                    $('.active_btn').show();
-                }
-            })
-            .catch(function(error) {
-                console.error('Error fetching scanning status:', error);
-            });
-        }
-
-                function renderScannedApps(appsData) {
+        function renderScannedApps(appsData) {
             var $appsSection = $('.my-apps-body');
-
             $appsSection.empty();
             var row;
             appsData.forEach(function (appData, index) {
@@ -52,7 +32,7 @@ odoo.define('odoo_infinity_app_store.fetch_repo', function (require) {
                 }
 
                 var appId = appData.id;
-                console.log(appId); // Log the ID to check if it's correct
+                console.log(appId);
 
                 // Create the card element
                 var $appCard = $('<div>').addClass('card col-md-4 m-2').attr('data-app-id', appId).css({
@@ -106,7 +86,6 @@ odoo.define('odoo_infinity_app_store.fetch_repo', function (require) {
                     window.location.href = '/app-details/' + appId;
                 });
                 $cardBody.append($row);
-
                 $cardBody.append($appIdDisplay);
                 $appCard.append($cardBody);
                 row.append($appCard);
@@ -114,24 +93,27 @@ odoo.define('odoo_infinity_app_store.fetch_repo', function (require) {
         }
 
         $("#apps_submit_repo_button").click(function () {
+        $("#loading_gif").show();
             var ssh_url = $("#sshInput").val();
-
             var sshRegex = /^(ssh:\/\/)([^@]+)@([^\/]+)\/(.+)\.git(#(\d+(\.\d+)?))?$/;
             if (!sshRegex.test(ssh_url)) {
                 alert("Please enter a valid SSH URL in the format: ssh://username@hostname/repository.git#branch");
                 return;
+                $("#loading_gif").hide();
             }
 
             var branch = ssh_url.match(/#(\d+(\.\d+)?)$/);
             if (!branch || !branch[1]) {
                 alert("Please specify a branch name in the SSH URL.");
                 return;
+                $("#loading_gif").hide();
             }
 
             ajax.jsonRpc("/submit_ssh_url", 'call', {'ssh_url': ssh_url})
             .then(function(response) {
                 alert("SSH key added successfully");
                 window.location.href = '/my/dashboard/repositories';
+                $("#loading_gif").hide();
             });
         });
 
@@ -140,6 +122,8 @@ odoo.define('odoo_infinity_app_store.fetch_repo', function (require) {
             $('#repositories-list').empty();
 
             response.forEach(function(data) {
+
+            console.log("-----------------------------------Data-------------------------------", data)
                 var sshUrl = data.ssh_url;
                 var repoId = data.id;
 
@@ -194,7 +178,6 @@ odoo.define('odoo_infinity_app_store.fetch_repo', function (require) {
                     var repoId = listItem.data('repo-id');
                     console.log("Scanning repository:", repoId);
                     fetchModuleInfo(sshUrl, listItem, repoId);
-                    checkScanningStatus(repoId);
                 });
 
                 var checkbox = $('<input>').addClass('scan_check').attr('type', 'checkbox').css({'margin-right': '30px', 'border-radius': '8px'});
@@ -226,3 +209,5 @@ odoo.define('odoo_infinity_app_store.fetch_repo', function (require) {
 
     });
 });
+
+

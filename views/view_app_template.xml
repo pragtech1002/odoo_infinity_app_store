@@ -9,7 +9,10 @@
                         <div class="row">
                             <!--                            App image Left Side-->
                             <div class="col-md-7 col-xl-6 mb32">
-                                <div class="loempia_app_cover shadow-sm"></div>
+                                <div class="loempia_app_cover shadow-sm">
+                                    <img class="app_gif_image" t-att-src="app.gif_image"/>
+
+                                </div>
                             </div>
 
                             <!--                            App Details Right side-->
@@ -23,6 +26,8 @@
                                         <h1 class="mt0 mb0 app_heading" itemprop="name">
                                             <b>
                                                 <t t-esc="app.name"/>
+                                                <t t-esc="app.id"/>
+
                                             </b>
                                         </h1>
                                         <small>by</small>
@@ -87,32 +92,20 @@
                                         <i class="fa fa-group"></i>
                                         Third Party
                                     </span>
-
-                                    <!--                                    <span title="Purchases">-->
-                                    <!--                                        <i class="fa fa-shopping-cart"></i>-->
-                                    <!--                                        1239-->
-                                    <!--                                    </span>-->
-
-
                                 </div>
 
-                                <form method="post" class="oe_import apps_buy_form"
-                                      action="https://www.odoo.com/shop/apps_cart_update">
-                                    <input class="js_module_id" type="hidden" value="174435"/>
-                                    <input class="js_product_price" type="hidden" value="379.0"/>
-
-
-                                    <input type="hidden" name="modules" value="[174435, 174434]"/>
-                                    <button id="buy_button" type="submit" class="btn btn-primary mb16 ">
+                                <form method="post" class="oe_import apps_buy_form">
+                                    <input type="text" name="product_id" t-att-value="app.id"/>
+                                    <button id="buy_button" type="submit"
+                                            class="btn btn-primary mb16 add_to_cart_button">
                                         <i class="fa fa-shopping-cart"></i>
                                         Add to Cart
                                     </button>
 
-
                                     <input id="url_cart" type="hidden" value="https://www.odoo.com"/>
                                     <a rel="nofollow" class="btn btn-primary mb16"
                                        href="https://www.emiprotechnologies.com/r/DOh">
-                                        Purchase
+                                        Live Preview
                                     </a>
                                     <div id="js_login_alert" class="alert alert-info d-none mt8 mb0" role="alert">
                                         Apps purchases are linked to your Odoo account, please <a class="alert-link"
@@ -301,8 +294,13 @@
                                 <div id="loempia_tabs_content" class="tab-content">
                                     <div id="desc" class="tab-pane active">
                                         <div class="container">
-                                            <div class="html-content-section">
-<!--                                                <div t-raw="app.index_html_content"/>-->
+                                            <div class="html-content-section" style="contain: content;">
+                                                <div id="description-content">
+                                                    <iframe src=".odoo/static/src/js/index.html" width="600"
+                                                            height="400" frameborder="0"/>
+
+                                                    <!--                                                  <t t-raw="app.index_html_content"/>-->
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -317,7 +315,6 @@
                                     </div>
                                 </div>
                             </div>
-
 
                             <!--                            Comments Box-->
                             <section id="loempia-comments" class="mb48 loempia_comments">
@@ -374,13 +371,8 @@
                                         </div>
                                     </form>
                                 </div>
-
                             </section>
-
-
                         </div>
-
-
                     </div>
                 </div>
             </t>

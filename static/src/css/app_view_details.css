@@ -80,4 +80,21 @@ margin-right:20px
 .oe_login_form .custom-register {
         display: flex;
         justify-content: center;
-    }
+}
+
+.app_gif_image {
+  height: 110%%;
+  width: 100%;
+}
+
+.loempia_app_cover.shadow-sm {
+  height: 48%;
+}
+
+.mt48 {
+  margin-top: 5px !important;
+
+}
+
+
+

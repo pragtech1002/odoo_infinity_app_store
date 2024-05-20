@@ -11,14 +11,18 @@
                     <strong>SSH Key:</strong>
                     <!--                    <span class="ssh-key"></span>-->
                     <div class="ssh-key-container">
-                        <input class="input_ssh_url" id="ssh-key-input" type="text" readonly="readonly" t-att-value="user_id.public_ssh_key"/>
-                        <a class="copy-icon" title="Copy SSH Key">
-                            <i class="fa fa-copy"></i>&amp;nbsp; copy ssh key
-                        </a>&amp;nbsp;
-                        <a id="download-link" class="download-icon" title="Download SSH Key"
-                           download="public_ssh_key.txt">
-                            <i class="fa fa-download"></i>&amp;nbsp; download ssh key
-                        </a>
+                        <input class="input_ssh_url" id="ssh-key-input" type="text" readonly="readonly"
+                               t-att-value="user_id.public_ssh_key"/>
+                        <t t-if="user_id.public_ssh_key">
+                            <a class="copy-icon" title="Copy SSH Key">
+                                <i class="fa fa-copy"></i>&amp;nbsp; copy ssh key
+                            </a>&amp;nbsp;
+
+                            <a id="download-link" class="download-icon" title="Download SSH Key"
+                               download="public_ssh_key.txt">
+                                <i class="fa fa-download"></i>&amp;nbsp; download ssh key
+                            </a>
+                        </t>
                     </div>
 
                 </p>

@@ -13,29 +13,6 @@
             </field>
         </record>
 
-        <!-- Tree View -->
-        <record id="view_github_repository_content_tree" model="ir.ui.view">
-            <field name="name">github.repository.content.tree</field>
-            <field name="model">github.repository.content</field>
-            <field name="arch" type="xml">
-                <tree>
-                    <field name="name"/>
-                    <field name="description"/>
-                    <field name="price"/>
-                    <field name="company_name"/>
-                    <field name="technical_name"/>
-                    <field name="website"/>
-                    <field name="depends"/>
-                    <field name="technical_name"/>
-                    <field name="odoo_versions"/>
-                    <field name="repository_name"/>
-                    <field name="ssh_repository_id"/>
-                    <field name="icon_image"/>
-                    <field name="scanned"/>
-                </tree>
-            </field>
-        </record>
-
 
         <!-- Form View -->
         <record id="view_ssh_repository_form" model="ir.ui.view">
@@ -53,58 +30,6 @@
             </field>
         </record>
 
-        <!-- Form View -->
-        <record id="view_github_repository_content_form" model="ir.ui.view">
-            <field name="name">github.repository.content.form</field>
-            <field name="model">github.repository.content</field>
-            <field name="arch" type="xml">
-                <form>
-                    <sheet>
-                        <group>
-                            <field name="name"/>
-                            <field name="description"/>
-                            <field name="category"/>
-                            <field name="currency"/>
-                            <field name="price"/>
-                            <field name="company_name"/>
-                            <field name="technical_name"/>
-                            <field name="license"/>
-                            <field name="website"/>
-                            <field name="depends"/>
-                            <field name="odoo_versions"/>
-                            <field name="repository_name"/>
-                            <field name="ssh_repository_id"/>
-                            <field name="icon_image"/>
-                            <field name="scanned"/>
-                            <group>
-                                <group>
-                                    <field name="index_html_content"/>
-
-                                </group>
-                            </group>
-                            <group>
-                                <group>
-                                    <field name="license_text_content"/>
-                                </group>
-                            </group>
-                            <group>
-                                <group>
-                                    <field name="img_files" widget="image" options='{"preview_image": "false"}'/>
-                                </group>
-                            </group>
-                        </group>
-                    </sheet>
-                </form>
-            </field>
-        </record>
-
-        <!-- Action github repository-->
-        <record id="action_github_repository_content" model="ir.actions.act_window">
-            <field name="name">GitHub Repository Content</field>
-            <field name="res_model">github.repository.content</field>
-            <field name="view_mode">tree,form</field>
-        </record>
-
 
         <!-- Action for the Form View -->
         <record id="action_ssh_repository_form" model="ir.actions.act_window">
@@ -117,7 +42,5 @@
         <menuitem id="menu_ssh_repository" name="SSH Repositories" sequence="10"/>
         <menuitem id="menu_ssh_repository_form" name="My SSH Repositories" parent="menu_ssh_repository"
                   action="action_ssh_repository_form"/>
-        <menuitem id="menu_github_repository_content" name="Repository Content" parent="menu_ssh_repository"
-                  action="action_github_repository_content"/>
     </data>
 </odoo>

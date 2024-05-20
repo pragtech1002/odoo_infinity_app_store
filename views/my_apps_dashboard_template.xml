@@ -6,6 +6,187 @@
                 <div id="wrap" class="oe_structure oe_empty">
                     <section class="my_apps_dashboard_section">
                         <div class="container">
+                            <nav id="loempia_sub_menu" class="mb0 navbar navbar-light bg-white  navbar-expand-lg">
+                                <div class="container">
+                                    <ul class="nav align-items-center ps-3 ps-lg-0">
+                                        <li class="nav-item dropdown loempia_category_dropdown">
+                                            <a href="#" data-bs-toggle="dropdown" role="button" aria-haspopup="true"
+                                               aria-expanded="false" class="nav-link dropdown-toggle">
+                                                <span class="d-inline-block d-md-none">Categories</span>
+                                                <span class="d-none d-md-inline">Categories</span>
+                                            </a>
+                                            <div class="dropdown-menu">
+
+                                                <a href="/apps/modules/browse" class="dropdown-item active">All</a>
+
+                                                <a href="/apps/modules/category/Accounting/browse"
+                                                   class="dropdown-item">
+                                                    Accounting
+                                                </a>
+                                                <a href="/apps/modules/category/Discuss/browse" class="dropdown-item">
+                                                    Discuss
+                                                </a>
+                                                <a href="/apps/modules/category/Document Management/browse"
+                                                   class="dropdown-item">
+                                                    Document Management
+                                                </a>
+                                                <a href="/apps/modules/category/eCommerce/browse" class="dropdown-item">
+                                                    eCommerce
+                                                </a>
+                                                <a href="/apps/modules/category/Human Resources/browse"
+                                                   class="dropdown-item">
+                                                    Human Resources
+                                                </a>
+                                                <a href="/apps/modules/category/Industries/browse"
+                                                   class="dropdown-item">
+                                                    Industries
+                                                </a>
+                                                <a href="/apps/modules/category/Localization/browse"
+                                                   class="dropdown-item">
+                                                    Localization
+                                                </a>
+                                                <a href="/apps/modules/category/Manufacturing/browse"
+                                                   class="dropdown-item">
+                                                    Manufacturing
+                                                </a>
+                                                <a href="/apps/modules/category/Marketing/browse" class="dropdown-item">
+                                                    Marketing
+                                                </a>
+                                                <a href="/apps/modules/category/Point of Sale/browse"
+                                                   class="dropdown-item">
+                                                    Point of Sale
+                                                </a>
+                                                <a href="/apps/modules/category/Productivity/browse"
+                                                   class="dropdown-item">
+                                                    Productivity
+                                                </a>
+                                                <a href="/apps/modules/category/Project/browse" class="dropdown-item">
+                                                    Project
+                                                </a>
+                                                <a href="/apps/modules/category/Purchases/browse" class="dropdown-item">
+                                                    Purchases
+                                                </a>
+                                                <a href="/apps/modules/category/Sales/browse" class="dropdown-item">
+                                                    Sales
+                                                </a>
+                                                <a href="/apps/modules/category/Warehouse/browse" class="dropdown-item">
+                                                    Warehouse
+                                                </a>
+                                                <a href="/apps/modules/category/Website/browse" class="dropdown-item">
+                                                    Website
+                                                </a>
+                                                <a href="/apps/modules/category/Extra Tools/browse"
+                                                   class="dropdown-item">
+                                                    Extra Tools
+                                                </a>
+                                                <a href="/apps/modules/category/Tutorial/browse" class="dropdown-item">
+                                                    Tutorial
+                                                </a>
+                                            </div>
+                                        </li>
+                                        <li class="nav-item divider"></li>
+                                    </ul>
+
+                                    <button class="navbar-toggler btn btn-sm ms-auto me-3 me-lg-0" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+                                        <span class="navbar-toggler-icon"></span>
+                                    </button>
+
+                                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                                        <ul class="navbar-nav loempia_price_nav align-items-lg-center">
+                                            <li class="nav-item dropdown loempia_price_dropdown">
+                                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
+                                                   role="button" aria-haspopup="true" aria-expanded="false">
+                                                    All Prices
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-left" role="menu">
+                                                    <a href="?" class="dropdown-item active">All Prices</a>
+                                                    <a href="?price=Free" class="dropdown-item">Open Source</a>
+                                                    <a href="?price=Paid" class="dropdown-item">Paid</a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <ul class="navbar-nav loempia_data_module_nav align-items-lg-center">
+                                            <li class="nav-item divider d-none d-lg-block"></li>
+                                            <li class="nav-item dropdown loempia_data_module_dropdown">
+                                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
+                                                   role="button" aria-haspopup="true" aria-expanded="false">
+                                                    All Platforms
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-left" role="menu">
+                                                    <a href="?" class="dropdown-item active">All Platforms</a>
+                                                    <a href="?data_module=1" class="dropdown-item">Odoo Online</a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <ul class="navbar-nav loempia_version_nav align-items-lg-center">
+                                            <li class="nav-item divider d-none d-lg-block"></li>
+                                            <li class="nav-item dropdown loempia_version_dropdown">
+                                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
+                                                   role="button" aria-haspopup="true" aria-expanded="false">
+                                                    All versions
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-start" role="menu">
+                                                    <a href="?series=" class="dropdown-item active">All versions</a>
+                                                    <a href="?series=17.0" class="dropdown-item">
+                                                        17.0
+                                                    </a>
+                                                    <a href="?series=16.0" class="dropdown-item">
+                                                        16.0
+                                                    </a>
+                                                    <a href="?series=15.0" class="dropdown-item">
+                                                        15.0
+                                                    </a>
+                                                    <a href="?series=14.0" class="dropdown-item">
+                                                        14.0
+                                                    </a>
+                                                    <a href="?series=13.0" class="dropdown-item">
+                                                        13.0
+                                                    </a>
+                                                    <a href="?series=12.0" class="dropdown-item">
+                                                        12.0
+                                                    </a>
+                                                    <a href="?series=11.0" class="dropdown-item">
+                                                        11.0
+                                                    </a>
+                                                    <a href="?series=10.0" class="dropdown-item">
+                                                        10.0
+                                                    </a>
+                                                    <a href="?series=9.0" class="dropdown-item">
+                                                        9.0
+                                                    </a>
+                                                    <a href="?series=8.0" class="dropdown-item">
+                                                        8.0
+                                                    </a>
+                                                    <a href="?series=7.0" class="dropdown-item">
+                                                        7.0
+                                                    </a>
+                                                    <a href="?series=6.1" class="dropdown-item">
+                                                        6.1
+                                                    </a>
+                                                    <a href="?series=6.0" class="dropdown-item">
+                                                        6.0
+                                                    </a>
+                                                    <a href="?series=5.0" class="dropdown-item">
+                                                        5.0
+                                                    </a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <ul class="navbar-nav navbar-right">
+                                            <li class="nav-item">
+                                                <a href="/apps/faq" class="nav-link">FAQ</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="/apps/sales-conditions" class="nav-link">Sales Conditions</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="/apps/vendor-guidelines" class="nav-link">Vendor Guidelines</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </nav>
                             <div class="row">
                                 <div class="col-lg-2 mt4">
                                     <a href="/my/dashboard" class="btn btn-primary mt48">
