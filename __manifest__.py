@@ -38,7 +38,6 @@
         'views/inherite_res_user_form.xml',
         'views/my_account_details.xml',
         'views/product_template.xml',
-        'views/cart_view_template.xml',
     ],
 
     'assets': {

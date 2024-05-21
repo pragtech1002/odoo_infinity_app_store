@@ -26,7 +26,7 @@
                                         <h1 class="mt0 mb0 app_heading" itemprop="name">
                                             <b>
                                                 <t t-esc="app.name"/>
-                                                <t t-esc="app.id"/>
+                                                <!--                                                <t t-esc="app.id"/>-->
 
                                             </b>
                                         </h1>
@@ -94,19 +94,38 @@
                                     </span>
                                 </div>
 
-                                <form method="post" class="oe_import apps_buy_form">
-                                    <input type="text" name="product_id" t-att-value="app.id"/>
-                                    <button id="buy_button" type="submit"
-                                            class="btn btn-primary mb16 add_to_cart_button">
-                                        <i class="fa fa-shopping-cart"></i>
-                                        Add to Cart
-                                    </button>
+                                <!-- Adjusted form for adding to cart -->
+                                <!--                                <form method="post" action="/shop/cart/update" class="oe_import apps_buy_form">-->
+                                <!--                                    <input type="hidden" name="product_id" t-att-value="app.id"/>-->
+                                <!--                                    <input type="hidden" name="add_qty" value="1"/>-->
+                                <!--                                    <div id="add_to_cart_wrap"-->
+                                <!--                                         t-attf-class="align-items-center mb-2 me-auto" style="width: 100%;">-->
+                                <!--                                        <button type="submit" id="add_to_cart" class="btn ws-btn-md btn-primary js_check_product flex-grow-1">-->
+                                <!--                                            <i class="fa fa-shopping-cart me-2"/>-->
+                                <!--                                            <span style="font-weight: bold">ADD TO CART</span>-->
+                                <!--                                        </button>-->
+                                <!--                                    </div>-->
+                                <!--                                </form>-->
 
-                                    <input id="url_cart" type="hidden" value="https://www.odoo.com"/>
-                                    <a rel="nofollow" class="btn btn-primary mb16"
-                                       href="https://www.emiprotechnologies.com/r/DOh">
-                                        Live Preview
-                                    </a>
+
+                                <form id="add_to_cart_form" method="post" action="/shop/cart/update"
+                                      class="oe_import apps_buy_form">
+                                    <input type="hidden" name="product_id" t-att-value="product.id"/>
+                                    <input type="hidden" name="add_qty" value="1"/>
+                                    <div id="add_to_cart_wrap" class="align-items-center mb-4 me-auto"
+                                         style="width: 100%;">
+                                        <button type="submit" id="add_to_cart"
+                                                class="btn ws-btn-md btn-primary js_check_product flex-grow-1">
+                                            <i class="fa fa-shopping-cart me-2"/>
+                                            <span style="font-weight: bold">ADD TO CART</span>
+                                        </button>
+
+                                        <input id="url_cart" type="hidden" value="https://www.odoo.com"/>
+                                        <a rel="nofollow" class="btn btn-primary"
+                                           href="https://www.emiprotechnologies.com/r/DOh">
+                                            Live Preview
+                                        </a>
+                                    </div>
                                     <div id="js_login_alert" class="alert alert-info d-none mt8 mb0" role="alert">
                                         Apps purchases are linked to your Odoo account, please <a class="alert-link"
                                                                                                   href="/web/login?redirect=/apps/modules/17.0/shopify_ept">
@@ -114,7 +133,6 @@
                                     </a> or <a class="alert-link" href="https://www.odoo.com/web/signup">sign up</a> first.
                                     </div>
                                 </form>
-
 
                                 <div class="p-0 col-12 d-md-none d-lg-block detail_Section">
                                     <table style="word-wrap: break-word;"
@@ -296,10 +314,8 @@
                                         <div class="container">
                                             <div class="html-content-section" style="contain: content;">
                                                 <div id="description-content">
-                                                    <iframe src=".odoo/static/src/js/index.html" width="600"
-                                                            height="400" frameborder="0"/>
 
-                                                    <!--                                                  <t t-raw="app.index_html_content"/>-->
+
                                                 </div>
                                             </div>
                                         </div>

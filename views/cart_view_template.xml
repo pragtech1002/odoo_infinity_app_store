@@ -3,21 +3,9 @@
         <!-- Inherit the existing cart_lines template -->
         <template id="inherit_cart_lines" inherit_id="website_sale.cart_lines">
             <xpath expr="//tbody" position="inside">
-                <tr t-foreach="website_sale.cart_lines" t-as="line">
-                    <td>
-                        <!-- Product Image -->
-                        <img t-if="line.product_id.image_1920" t-att-src="line.product_id.image_1920" alt=""/>
-                    </td>
-                    <td>
-                        <!-- Product Name -->
-                        <span t-field="line.product_id.name"/>
-                    </td>
-                    <td>
-                        <!-- Product Price -->
-                        <span t-field="line.product_id.lst_price"/>
-                    </td>
-                    <!-- Add more fields here if needed -->
-                </tr>
+
+
+
             </xpath>
         </template>
     </data>

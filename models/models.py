@@ -118,6 +118,7 @@ class SSHRepository(models.Model):
                                 'name': app_data['name'],
                                 'description': app_data['description'],
                                 'price': app_data['price'],
+                                'list_price': app_data['price'],
                                 'company_name': app_data['company_name'],
                                 'technical_name': module_name,
                                 'odoo_versions': app_data['odoo_versions'],
@@ -268,3 +269,13 @@ class ProductProduct(models.Model):
     license = fields.Char(string="License")
     index_html_content = fields.Text(string="Index HTML Content")
     license_text_content = fields.Text(string="License Text Content")
+
+    # attribute storing version wise module in the product.template model
+    attribute_id = fields.Many2one('product.attribute', string="Attribute", default=lambda self: self._get_default_attribute())
+
+    @api.model
+    def _get_default_attribute(self):
+        attribute = self.env['product.attribute'].search([('name', '=', 'versions')], limit=1)
+        if not attribute:
+            attribute = self.env['product.attribute'].create({'name': 'versions'})
+        return attribute
