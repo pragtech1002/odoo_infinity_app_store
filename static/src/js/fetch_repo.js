@@ -8,6 +8,8 @@ odoo.define('odoo_infinity_app_store.fetch_repo', function (require) {
     $(document).ready(function () {
         ajax.jsonRpc("/scanned_apps", 'call', {})
         .then(function (response) {
+            console.log("Scanned APPS---------------------------------",response)
+
             var scannedAppsData = response
             renderScannedApps(scannedAppsData);
         });
@@ -32,10 +34,16 @@ odoo.define('odoo_infinity_app_store.fetch_repo', function (require) {
                 }
 
                 var appId = appData.id;
-                console.log(appId);
+                console.log("APP ID",appId)
+
+                var sshId = appData.ssh_repository_id;
+                console.log("sshId ID",sshId)
+
+                var productId = appData.product;
+                console.log("productId ID",productId)
 
                 // Create the card element
-                var $appCard = $('<div>').addClass('card col-md-4 m-2').attr('data-app-id', appId).css({
+                var $appCard = $('<div>').addClass('card col-md-4 m-2').attr('data-app-id', appId).attr('data-ssh-id', sshId).attr('data-product-id', productId).css({
                     'width': '18rem',
                     'padding': '0px'
                 });
@@ -83,8 +91,17 @@ odoo.define('odoo_infinity_app_store.fetch_repo', function (require) {
 
                 $appCard.on('click', function() {
                     var appId = $(this).attr('data-app-id');
-                    window.location.href = '/app-details/' + appId;
+                    var productId = $(this).attr('data-product-id');
+                    window.location.href = '/app-details/' + appId +'/'+ productId ;
                 });
+
+
+//                $appCard.on('click', function() {
+//                    var appId = $(this).attr('data-app-id');
+//                    console.log("appId------------------",appId)
+//                    window.location.href = '/app-details/' + appId;
+//                });
+
                 $cardBody.append($row);
                 $cardBody.append($appIdDisplay);
                 $appCard.append($cardBody);

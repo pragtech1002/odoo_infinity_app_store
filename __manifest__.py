@@ -20,11 +20,12 @@
     'version': '16.0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'website','website_sale'],
+    'depends': ['base', 'website', 'website_sale'],
 
     # always loaded
     'data': [
         'security/ir.model.access.csv',
+        'data/attribute_version.xml',
         # 'security/security.xml',
         'views/ssh_repository_views.xml',
         'views/odoo_infinity_app_store.xml',
@@ -38,6 +39,7 @@
         'views/inherite_res_user_form.xml',
         'views/my_account_details.xml',
         'views/product_template.xml',
+        'views/product_product.xml',
     ],
 
     'assets': {
@@ -46,6 +48,7 @@
             '/odoo_infinity_app_store/static/src/js/fetch_repo.js',
             '/odoo_infinity_app_store/static/src/js/login_data.js',
             '/odoo_infinity_app_store/static/src/js/add_cart.js',
+            '/odoo_infinity_app_store/static/src/js/load_data.js',
             '/odoo_infinity_app_store/static/src/css/app_view_details.css',
         ],
     },

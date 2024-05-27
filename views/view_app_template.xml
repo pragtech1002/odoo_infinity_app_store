@@ -7,7 +7,7 @@
                     <t t-set="title">App Details</t>
                     <div class="container apps_page">
                         <div class="row">
-                            <!--                            App image Left Side-->
+                            <!-- App image Left Side-->
                             <div class="col-md-7 col-xl-6 mb32">
                                 <div class="loempia_app_cover shadow-sm">
                                     <img class="app_gif_image" t-att-src="app.gif_image"/>
@@ -15,54 +15,29 @@
                                 </div>
                             </div>
 
-                            <!--                            App Details Right side-->
+                            <!-- App Details Right side-->
                             <div id="loempia_app_infos" class="col-md-5 col-xl-6 mb32 loempia_app_info_has_cover">
                                 <div class="d-flex">
                                     <img itemprop="image" class="shadow-sm app_icon_image card-image"
-                                         t-att-src="app.icon_image"
+                                         t-att-src="product.icon_image"
                                          loading="lazy"/>
 
                                     <div class="loempia_app_title">
                                         <h1 class="mt0 mb0 app_heading" itemprop="name">
                                             <b>
-                                                <t t-esc="app.name"/>
+                                                <t t-esc="product.name"/>
                                                 <!--                                                <t t-esc="app.id"/>-->
 
                                             </b>
                                         </h1>
                                         <small>by</small>
-                                        <a href="">
+                                        <a t-attf-href="{{ product.website }}">
                                             <t t-esc="app.company_name"/>
                                         </a>
-                                        <!--                                    <a href="/apps/modules/browse?author=Emipro Technologies Pvt. Ltd.">-->
-                                        <!--                                        <span itemprop="author" itemscope="" itemtype="http://schema.org/Person">-->
-                                        <!--                                            <span itemprop="name">Emipro Technologies Pvt. Ltd.</span>-->
-                                        <!--                                            <span class="d-none" itemprop="url">http://www.emiprotechnologies.com/-->
-                                        <!--                                            </span>-->
-                                        <!--                                        </span>-->
-                                        <!--                                    </a>-->
 
                                         <div class="mb4">
-                                            <!--                                        <span class="d-none" itemprop="operatingSystem">Odoo</span>-->
-                                            <!--                                        <span itemprop="aggregateRating" itemscope=""-->
-                                            <!--                                              itemtype="http://schema.org/AggregateRating">-->
-                                            <!--                                            <meta itemprop="ratingValue" content="4">-->
-                                            <!--                                            <meta itemprop="worstRating" content="1">-->
-                                            <!--                                            <meta itemprop="bestRating" content="5">-->
-                                            <!--                                            <meta itemprop="reviewCount" content="173">-->
-                                            <!--                                            <meta itemprop="ratingCount" content="70">-->
-                                            <!--                                        </span>-->
                                             <a href="#loempia-comments">
-                                                <span class="loempia_rating_stars" title="70 votes">
-                                                    <span class="fa fa-star rating_star_active"></span>
-                                                    <span class="fa fa-star rating_star_active"></span>
-                                                    <span class="fa fa-star rating_star_active"></span>
-                                                    <span class="fa fa-star rating_star_active"></span>
-                                                    <span class="fa fa-star-o rating_star_active"></span>
-                                                    <b>
-                                                        <small>70</small>
-                                                    </b>
-                                                </span>
+
                                             </a>
                                         </div>
                                     </div>
@@ -72,7 +47,7 @@
                                             <b>
                                                 <span class="oe_currency_value">
                                                     $
-                                                    <t t-esc="app.price"/>
+                                                    <t t-esc="product.price"/>
                                                 </span>
                                             </b>
                                         </h1>
@@ -84,7 +59,7 @@
                                     <span class="badge bg-o-color-2" itemprop="softwareVersion">
                                         <b>
                                             V
-                                            <t t-esc="app.odoo_versions"/>
+                                            <t t-esc="product.odoo_versions"/>
                                         </b>
                                     </span>
 
@@ -94,23 +69,9 @@
                                     </span>
                                 </div>
 
-                                <!-- Adjusted form for adding to cart -->
-                                <!--                                <form method="post" action="/shop/cart/update" class="oe_import apps_buy_form">-->
-                                <!--                                    <input type="hidden" name="product_id" t-att-value="app.id"/>-->
-                                <!--                                    <input type="hidden" name="add_qty" value="1"/>-->
-                                <!--                                    <div id="add_to_cart_wrap"-->
-                                <!--                                         t-attf-class="align-items-center mb-2 me-auto" style="width: 100%;">-->
-                                <!--                                        <button type="submit" id="add_to_cart" class="btn ws-btn-md btn-primary js_check_product flex-grow-1">-->
-                                <!--                                            <i class="fa fa-shopping-cart me-2"/>-->
-                                <!--                                            <span style="font-weight: bold">ADD TO CART</span>-->
-                                <!--                                        </button>-->
-                                <!--                                    </div>-->
-                                <!--                                </form>-->
-
-
                                 <form id="add_to_cart_form" method="post" action="/shop/cart/update"
                                       class="oe_import apps_buy_form">
-                                    <input type="hidden" name="product_id" t-att-value="product.id"/>
+                                    <input type="text" name="product_id" t-att-value="product.id"/>
                                     <input type="hidden" name="add_qty" value="1"/>
                                     <div id="add_to_cart_wrap" class="align-items-center mb-4 me-auto"
                                          style="width: 100%;">
@@ -140,22 +101,22 @@
                                         <thead class="alert-info">
                                             <tr>
                                                 <td>
-                                                    <b>Availability</b>
+                                                    <b>Accessibility</b>
                                                 </td>
                                                 <td>
                                                     <div class="loempia_platform_availability w-100 d-flex">
-                                                        <div class="flex-grow-1">
-                                                            <i class="fa fa-times" style="color: red;"></i>
-                                                            <span>Odoo Online</span>
-                                                        </div>
+                                                        <!--                                                        <div class="flex-grow-1">-->
+                                                        <!--                                                            <i class="fa fa-times" style="color: red;"></i>-->
+                                                        <!--                                                            <span>Odoo Online</span>-->
+                                                        <!--                                                        </div>-->
                                                         <div class="flex-grow-1">
                                                             <i class="fa fa-check" style="color: green;"></i>
                                                             Odoo.infinity
                                                         </div>
-                                                        <!--                                                        <div class="flex-grow-1">-->
-                                                        <!--                                                            <i class="fa fa-check" style="color: green;"></i>-->
-                                                        <!--                                                            On Premise-->
-                                                        <!--                                                        </div>-->
+                                                        <div class="flex-grow-1">
+                                                            <i class="fa fa-check" style="color: green;"></i>
+                                                            On Premise
+                                                        </div>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -170,10 +131,10 @@
                                                 </td>
                                                 <td>
                                                     <!-- Render app dependencies dynamically -->
-                                                    <t t-if="app.depends">
+                                                    <t t-if="product.depends">
                                                         <ul>
                                                             <t t-set="dependencies"
-                                                               t-value="app.depends.replace('[', '').replace(']', '').replace('\'', '').split(', ')"/>
+                                                               t-value="product.depends.replace('[', '').replace(']', '').replace('\'', '').split(', ')"/>
                                                             <t t-foreach="dependencies" t-as="dependency">
                                                                 <li>
                                                                     <t t-esc="dependency"/>
@@ -181,19 +142,6 @@
                                                             </t>
                                                         </ul>
                                                     </t>
-
-                                                    <!--                                                    •-->
-                                                    <!--                                                    <span>Sales (sale_management)</span>-->
-                                                    <!--                                                    <br/>-->
-                                                    <!--                                                    •-->
-                                                    <!--                                                    <span>Invoicing (account)</span>-->
-                                                    <!--                                                    <br/>-->
-                                                    <!--                                                    •-->
-                                                    <!--                                                    <span>Discuss (mail)</span>-->
-                                                    <!--                                                    <br/>-->
-                                                    <!--                                                    •-->
-                                                    <!--                                                    <span>Inventory (stock)</span>-->
-                                                    <!--                                                    <br/>-->
                                                 </td>
                                             </tr>
                                         </thead>
@@ -205,7 +153,7 @@
                                                 </td>
                                                 <td>
                                                     <code>
-                                                        <t t-esc="app.technical_name"/>
+                                                        <t t-esc="product.technical_name"/>
                                                     </code>
                                                 </td>
                                             </tr>
@@ -215,7 +163,7 @@
                                                 </td>
                                                 <td>
                                                     <code>
-                                                        <t t-esc="app.license"/>
+                                                        <t t-esc="product.license"/>
                                                     </code>
                                                 </td>
                                             </tr>
@@ -224,8 +172,9 @@
                                                     <b>Website</b>
                                                 </td>
                                                 <td>
-                                                    <a rel="nofollow" t-attf-href="{{ app.website }}" target="_blank">
-                                                        <t t-esc="app.website"/>
+                                                    <a rel="nofollow" t-attf-href="{{ product.website }}"
+                                                       target="_blank">
+                                                        <t t-esc="product.website"/>
                                                     </a>
                                                 </td>
                                             </tr>
@@ -234,56 +183,22 @@
                                                     <b>Versions</b>
                                                 </td>
                                                 <td>
-                                                    <a>
-                                                        <span class="badge bg-primary mr8 ">
-                                                            17.0
-                                                        </span>
-                                                    </a>
-                                                    <a href="/apps/modules/16.0/shopify_ept">
-                                                        <span class="badge bg-secondary mr8">
-                                                            16.0
-                                                        </span>
-                                                    </a>
-                                                    <a href="/apps/modules/9.0/shopify_ept">
-                                                        <span class="badge bg-secondary mr8">
-                                                            9.0
-                                                        </span>
-                                                    </a>
-                                                    <a href="/apps/modules/8.0/shopify_ept">
-                                                        <span class="badge bg-secondary mr8">
-                                                            8.0
-                                                        </span>
-                                                    </a>
-                                                    <a href="/apps/modules/11.0/shopify_ept">
-                                                        <span class="badge bg-secondary mr8">
-                                                            11.0
-                                                        </span>
-                                                    </a>
-                                                    <a href="/apps/modules/12.0/shopify_ept">
-                                                        <span class="badge bg-secondary mr8">
-                                                            12.0
-                                                        </span>
-                                                    </a>
-                                                    <a href="/apps/modules/10.0/shopify_ept">
-                                                        <span class="badge bg-secondary mr8">
-                                                            10.0
-                                                        </span>
-                                                    </a>
-                                                    <a href="/apps/modules/13.0/shopify_ept">
-                                                        <span class="badge bg-secondary mr8">
-                                                            13.0
-                                                        </span>
-                                                    </a>
-                                                    <a href="/apps/modules/14.0/shopify_ept">
-                                                        <span class="badge bg-secondary mr8">
-                                                            14.0
-                                                        </span>
-                                                    </a>
-                                                    <a href="/apps/modules/15.0/shopify_ept">
-                                                        <span class="badge bg-secondary mr8">
-                                                            15.0
-                                                        </span>
-                                                    </a>
+                                                    <t t-if="product.technical_name">
+                                                        <t t-set="all_products"
+                                                           t-value="env['product.product'].search([('technical_name', '=', product.technical_name)])"/>
+                                                        <t t-foreach="all_products" t-as="prod">
+                                                            <t t-if="prod.odoo_versions">
+                                                                <t t-set="versions"
+                                                                   t-value="prod.odoo_versions.split(',')"/>
+                                                                <t t-foreach="versions" t-as="version">
+                                                                    <a class="badge bg-primary mr8 version-link"
+                                                                       t-attf-href="/app-details/#{prod.product_tmpl_id.id}/#{prod.id}">
+                                                                        <t t-esc="version"/>
+                                                                    </a>
+                                                                </t>
+                                                            </t>
+                                                        </t>
+                                                    </t>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -297,7 +212,7 @@
                                 </small>
                             </div>
 
-                            <!--                            Module Description -->
+                            <!-- Module Description -->
                             <div id="module-description">
                                 <div id="loempia_tabs">
                                     <ul role="tablist" class="nav nav-tabs justify-content-center" data-tabs="tabs">
@@ -315,7 +230,13 @@
                                             <div class="html-content-section" style="contain: content;">
                                                 <div id="description-content">
 
+                                                <iframe t-att-src="app.index_html_content"
+                                                            width="100%"
+                                                            height="1200" frameborder="0"/>
 
+<!--                                                    <iframe src="/odoo_infinity_app_store/static/src/js/index.html"-->
+<!--                                                            width="100%"-->
+<!--                                                            height="1200" frameborder="0"/>-->
                                                 </div>
                                             </div>
                                         </div>
@@ -332,7 +253,7 @@
                                 </div>
                             </div>
 
-                            <!--                            Comments Box-->
+                            <!-- Comments Box-->
                             <section id="loempia-comments" class="mb48 loempia_comments">
 
                                 <div class="col-lg-8 offset-lg-2 mb32 css_editable_mode_hidden">

@@ -55,8 +55,7 @@ class DashboardController(http.Controller):
         repository = request.env['ssh.repository'].sudo().browse(repo_id)
         if repository:
             # repository.fetch_repository_content()
-            repository_contents = request.env['product.template'].sudo().search(
-                [('ssh_repository_id', '=', repo_id)])
+            repository_contents = request.env['product.template'].sudo().search([('ssh_repository_id', '=', repo_id)])
             data = []
             for content in repository_contents:
                 content.write({'scanned': True})
@@ -68,6 +67,7 @@ class DashboardController(http.Controller):
                     'list_price':content.price,
                     'company_name': content.company_name,
                     'technical_name': content.technical_name,
+                    'default_code': content.technical_name,
                     'odoo_versions': content.odoo_versions,
                     'repository_name': content.repository_name,
                     'icon_image': content.icon_image,
@@ -77,12 +77,37 @@ class DashboardController(http.Controller):
         return json.dumps({'data': data})
 
 
+    # @http.route('/scanned_apps', type='json', auth='user', csrf=False)
+    # def scanned_apps_content(self):
+    #     repository_contents = request.env['product.product'].sudo().search([('scanned', '=', True)])
+    #     vals = []
+    #     for content in repository_contents:
+    #         vals.append({
+    #             'id': content.id,
+    #             'name': content.name,
+    #             'description': content.description,
+    #             'price': content.price,
+    #             'company_name': content.company_name,
+    #             'technical_name': content.technical_name,
+    #             'odoo_versions': content.odoo_versions,
+    #             'repository_name': content.repository_name,
+    #             'icon_image': content.icon_image,
+    #             'ssh_repository_id': content.ssh_repository_id.id if content.ssh_repository_id else None,
+    #             'scanned':content.scanned
+    #         })
+    #     return vals
+
     @http.route('/scanned_apps', type='json', auth='user', csrf=False)
     def scanned_apps_content(self):
         repository_contents = request.env['product.template'].sudo().search(
             [('scanned', '=', True)])
+
+        print("product id from template--------------------", repository_contents)
         vals = []
         for content in repository_contents:
+            product = request.env['product.product'].sudo().search(
+                [('product_tmpl_id', '=', content.id)], limit=1)
+            print('product------------------scann------', product)
             vals.append({
                 'id': content.id,
                 'name': content.name,
@@ -94,33 +119,34 @@ class DashboardController(http.Controller):
                 'repository_name': content.repository_name,
                 'icon_image': content.icon_image,
                 'ssh_repository_id': content.ssh_repository_id.id if content.ssh_repository_id else None,
-                'scanned':content.scanned
+                'scanned': content.scanned,
+                'product': product.id if product else None  # Include the product ID
             })
         return vals
 
-    @http.route('/get_scanning_status', type='json', auth='user', csrf=False)
-    def get_scanning_status(self, repo_id):
-        # Fetch the repository content based on the provided repo_id
-        repository_content = request.env['product.template'].sudo().search(
-            [('ssh_repository_id', '=', repo_id), ('scanned', '=', True)], limit=1)
 
-        if repository_content:
-            # Check if the repository content has been scanned
-            scanned = repository_content.scanned
-        else:
-            scanned = False
-
-        return json.dumps({'scanned': scanned})
-
-    @http.route(['/app-details/<int:app_id>'], type='http', auth='public', website=True, csrf=False)
-    def app_details(self, app_id, **kwargs):
+    # @http.route(['/app-details/<int:app_id>'], type='http', auth='public', website=True, csrf=False)
+    @http.route(['/app-details/<int:app_id>/<int:product_id>'], type='http', auth='public', website=True, csrf=False)
+    def app_details(self, app_id,product_id, **kwargs):
         app = request.env['product.template'].sudo().browse(app_id)
-        product = request.env['product.product'].sudo().search([('product_tmpl_id', '=', app_id)], limit=1)
+        product = request.env['product.product'].sudo().browse(product_id)
+        print("product details-------------------------------------------------",product.id)
         return request.render('odoo_infinity_app_store.view_app_template', {
             'app': app,
             'product': product,
-            'ssh_repository_id': app.ssh_repository_id.id
+            'product_id': product.id,
+            'ssh_repository_id': product.ssh_repository_id.id,
+            'index_url': '/odoo_infinity_app_store/static/src/js/index.html'
+
         })
+
+    @http.route('/get_product_details', type='json', auth='public', website=True)
+    def get_product_details(self, version=None, **kwargs):
+        product_details = request.env['product.product'].sudo().search([('odoo_versions', 'like', version)])
+
+        print("product details",product_details)
+
+
 
 class AuthSignupHome(http.Controller):
 
@@ -128,7 +154,6 @@ class AuthSignupHome(http.Controller):
     def web_auth_signup(self, **post):
 
         return request.render('odoo_infinity_app_store.auth_signup_register_form',{})
-
 
     @http.route('/web/signup/submit', type='json', auth='public', website=True, csrf=False)
     def web_auth_signup_submit(self, **post):
@@ -173,54 +198,6 @@ class MyWebsiteSale(WebsiteSale):
             order._cart_update(product_id=product_id, add_qty=add_qty)
 
         return request.redirect('/shop/cart')
-
-    # @http.route(['/shop/cart/update_json'], type='json', auth='public', website=True)
-    # def cart_update_json(self, product_id, add_qty=1, set_qty=0, display=True):
-    #     """ Add product to cart and return JSON response """
-    #     order = request.website.sale_get_order(force_create=1)
-    #     print("PRICELIST------------------------",order)
-    #     print("PRICELIST------------------------",order.pricelist_id)
-    #
-    #     # product_id = 57
-    #     product_id = int(product_id)
-    #     print("========================",product_id)
-    #     add_qty = float(add_qty)
-    #
-    #     if set_qty:
-    #         set_qty = float(set_qty)
-    #         order._cart_update(product_id=product_id, set_qty=set_qty)
-    #     else:
-    #         order._cart_update(product_id=product_id, add_qty=add_qty)
-    #
-    #     if not display:
-    #         return None
-    #
-    #     # order = request.website.sale_get_order()
-    #     if not order:
-    #         return {}
-    #
-    #     values = {
-    #         'website_sale_order': order,
-    #         # 'compute_currency': order.pricelist_id.get_currency,
-    #     }
-    #
-    #     return {
-    #         'status': 'success',
-    #         'website_sale.short_order_summary': request.env['ir.ui.view']._render_template('website_sale.short_order_summary', values)
-    #     }
-    #
-    #
-    @http.route('/repository/<int:repo_id>/index_html_content', type='http', auth='user', website=True, csrf=False)
-    def repository_index_html_content(self, repo_id, **kwargs):
-        repository_content = request.env['product.template'].sudo().search(
-            [('ssh_repository_id', '=', repo_id)], limit=1)
-
-        if repository_content and repository_content.index_html_content:
-            return Response(repository_content.index_html_content, content_type='text/html')
-        else:
-            return Response("<html><body><h1>No content available</h1></body></html>", content_type='text/html')
-
-
 
 
 

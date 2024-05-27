@@ -1,0 +1,6 @@
+<odoo>
+    <record id="product_attribute_version" model="product.attribute">
+        <field name="name">Version</field>
+        <field name="create_variant">no_variant</field>
+    </record>
+</odoo>

@@ -9,15 +9,12 @@
                 <page string="Module Information" name="module_information">
                     <group>
                         <group>
-                            <field name="company_name"/>
                             <field name="technical_name"/>
-                            <field name="odoo_versions"/>
                             <field name="repository_name"/>
                         </group>
                         <group>
                             <field name="gif_image"/>
                             <field name="name"/>
-                            <field name="description"/>
                             <field name="category"/>
                         </group>
                         <group>
@@ -27,8 +24,6 @@
                             <field name="website"/>
                         </group>
                         <group>
-                            <field name="depends"/>
-                            <field name="odoo_versions"/>
                             <field name="ssh_repository_id"/>
                             <field name="icon_image"/>
                             <field name="scanned"/>
