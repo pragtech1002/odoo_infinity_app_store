@@ -67,16 +67,15 @@ class DashboardController(http.Controller):
                     'name': content.name,
                     'description': content.description,
                     'price': content.price,
-                    'list_price': content.price,
                     'company_name': content.company_name,
                     'technical_name': content.technical_name,
                     'default_code': content.technical_name,
                     'odoo_versions': content.odoo_versions,
                     'repository_name': content.repository_name,
                     'icon_image': content.icon_image,
-                    'gif_image': gif_path,
-                    'index_html_content': index_html_content,
-                    'license_text_content': license_text_content,
+                    'gif_image': content.gif_image,
+                    'index_html_content': content.index_html_content,
+                    'license_text_content': content.license_text_content,
                     'ssh_repository_id': content.ssh_repository_id.id if content.ssh_repository_id else None,
                     'scanned': content.scanned,
                     'ispublished': content.ispublished,
@@ -113,7 +112,7 @@ class DashboardController(http.Controller):
         return vals
 
     @http.route('/publish_repository', type='json', auth='user', csrf=False)
-    def fetch_repository_content(self, repo_id):
+    def publish_repository_content(self, repo_id):
         repository = request.env['ssh.repository'].sudo().browse(repo_id)
         if repository:
             repository_contents = request.env['product.template'].sudo().search([('ssh_repository_id', '=', repo_id)])

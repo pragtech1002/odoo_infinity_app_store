@@ -15,6 +15,7 @@ odoo.define('odoo_infinity_app_store.fetch_repo', function (require) {
         });
 
         function fetchModuleInfo(sshUrl, listItem, repoId) {
+            console.log("==========fetchModuleInfo===========",repoId)
             ajax.jsonRpc("/fetch_repository_content", 'call', {
                 repo_id: repoId
             }).then(function (response) {

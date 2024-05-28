@@ -2,20 +2,9 @@
     <data noupdate="1">
 
         <!-- Admin Group Record Rules -->
-        <record id="rule_ssh_repository_admin" model="ir.rule">
-            <field name="name">SSH Repository Admin Access</field>
+        <record id="rule_admin_access" model="ir.rule">
+            <field name="name">Admin Access</field>
             <field name="model_id" ref="model_ssh_repository"/>
-            <field name="groups" eval="[(4, ref('base.group_system'))]"/>
-            <field name="domain_force">[(1, '=', 1)]</field>
-            <field name="perm_read" eval="1"/>
-            <field name="perm_write" eval="1"/>
-            <field name="perm_create" eval="1"/>
-            <field name="perm_unlink" eval="1"/>
-        </record>
-
-        <record id="rule_product_template_admin" model="ir.rule">
-            <field name="name">Product Template Admin Access</field>
-            <field name="model_id" ref="model_product_template"/>
             <field name="groups" eval="[(4, ref('base.group_system'))]"/>
             <field name="domain_force">[(1, '=', 1)]</field>
             <field name="perm_read" eval="1"/>
@@ -25,22 +14,11 @@
         </record>
 
         <!-- Portal User Group Record Rules -->
-        <record id="rule_ssh_repository_portal" model="ir.rule">
-            <field name="name">SSH Repository Portal Full Access</field>
+        <record id="rule_portal_user_access" model="ir.rule">
+            <field name="name">Portal User Access</field>
             <field name="model_id" ref="model_ssh_repository"/>
             <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
-            <field name="domain_force">[(1, '=', 1)]</field>
-            <field name="perm_read" eval="1"/>
-            <field name="perm_write" eval="1"/>
-            <field name="perm_create" eval="1"/>
-            <field name="perm_unlink" eval="1"/>
-        </record>
-
-        <record id="rule_product_template_portal" model="ir.rule">
-            <field name="name">Product Template Portal Access</field>
-            <field name="model_id" ref="model_product_template"/>
-            <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
-            <field name="domain_force">[('ssh_repository_id.user_id', '=', user.id)]</field>
+            <field name="domain_force">[('user_id', '=', user.id)]</field>
             <field name="perm_read" eval="1"/>
             <field name="perm_write" eval="1"/>
             <field name="perm_create" eval="1"/>
