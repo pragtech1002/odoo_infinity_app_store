@@ -56,32 +56,34 @@ odoo.define('odoo_infinity_app_store.auth_signup_register_form', function (requi
     // Check if the GitHub account exists
    checkGitHubAccountExists(github_account_name)
 
-        .then(function (exists) {
-        console.log('hell--===',exists)
-            if (!exists) {
-                alert('GitHub account does not exist. Please enter a valid GitHub username.');
-            } else {
-                // Proceed with form submission if GitHub account exists
-                ajax.jsonRpc('/web/signup/submit', 'call', {
-                    login: login,
-                    name: name,
-                    password: password,
-                    github_account_name: github_account_name
-                }).then(function (result) {
-                    if (result.error) {
-                        alert(result.error);
-                    } else {
-                        alert('User registered successfully!');
-                        window.location.href = "/web/login";
-                    }
-                });
-            }
-        })
-        .catch(function (error) {
-            console.error('Error checking GitHub account:', error);
-            alert('An error occurred while checking the GitHub account. Please try again later.');
-        });
-});
+         checkGitHubAccountExists(github_account_name)
+            .then(function (exists) {
+                console.log('GitHub account existence:', exists);
+                if (!exists) {
+                    alert('GitHub account does not exist. Please enter a valid GitHub username.');
+                } else {
+                    // Proceed with form submission if GitHub account exists
+                    ajax.jsonRpc('/web/signup/submit', 'call', {
+                        login: login,
+                        name: name,
+                        password: password,
+                        github_account_name: github_account_name
+                    }).then(function (result) {
+                        if (result.error) {
+                            alert(result.error);
+                        } else {
+                            alert('User registered successfully!');
+                            window.location.href = "/web/login";
+                        }
+                    });
+                }
+            })
+            .catch(function (error) {
+                console.error('Error checking GitHub account:', error);
+                alert('An error occurred while checking the GitHub account. Please try again later.');
+            });
+    });
+
 
 
 //        click on copy button data save code
@@ -121,14 +123,14 @@ odoo.define('odoo_infinity_app_store.auth_signup_register_form', function (requi
 });
 
 function checkGitHubAccountExists(username) {
-console.log('hello-------------',username)
+    console.log('Checking GitHub account:', username);
     return new Promise(function (resolve, reject) {
         // Make an AJAX request to GitHub API to check if the user exists
         $.ajax({
             url: 'https://api.github.com/users/' + username,
             type: 'GET',
             success: function (response) {
-            console.log('response-------------',response)
+                console.log('GitHub API response:', response);
                 // If the response contains data, the user exists
                 resolve(true);
             },

@@ -95,3 +95,12 @@ margin-right:20px
   margin-top: 5px !important;
 
 }
+
+.blurred {
+    filter: blur(3px); /* Apply a blur effect */
+    pointer-events: none; /* Make the card non-clickable */
+    opacity: 0.7; /* Optionally reduce opacity for a translucent effect */
+}
+
+
+

@@ -10,6 +10,8 @@
                     <page string="Module Information" name="module_information">
                         <group>
                             <group>
+                                <field name="ispublished"/>
+                                <field name="isunpublished"/>
                                 <field name="company_name"/>
                                 <field name="technical_name"/>
                                 <field name="odoo_versions"/>
@@ -29,7 +31,7 @@
                             </group>
                             <group>
                                 <field name="depends"/>
-<!--                                <field name="index_html_content"/>-->
+                                <!--                            <field name="odoo_versions"/>-->
                                 <field name="ssh_repository_id"/>
                                 <field name="icon_image"/>
                                 <field name="scanned"/>

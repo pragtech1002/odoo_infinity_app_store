@@ -1,6 +1,6 @@
-//odoo.define('odoo_infinity_app_store.add_to_cart', function (require) {
-//    'use strict';
-//
+odoo.define('odoo_infinity_app_store.add_to_cart', function (require) {
+    'use strict';
+
 //    var ajax = require('web.ajax');
 //    var core = require('web.core');
 //    var QWeb = core.qweb;
@@ -24,7 +24,7 @@
 //        });
 //    });
 //});
-//
-//
-//});
+
+
+});
 

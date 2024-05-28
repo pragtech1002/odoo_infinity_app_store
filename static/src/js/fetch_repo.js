@@ -34,19 +34,29 @@ odoo.define('odoo_infinity_app_store.fetch_repo', function (require) {
                 }
 
                 var appId = appData.id;
-                console.log("APP ID",appId)
+                console.log("APP ID-------",appId)
 
                 var sshId = appData.ssh_repository_id;
-                console.log("sshId ID",sshId)
+                console.log("sshId ID-------",sshId)
 
                 var productId = appData.product;
-                console.log("productId ID",productId)
+                console.log("productId ID------",productId)
+
+                var isPublished = appData.ispublished;
+                console.log("PUBLISHED",isPublished)
+
+                var isUnpublished = appData.isunpublished;
+                console.log("UNPUBLISHED",isUnpublished)
 
                 // Create the card element
                 var $appCard = $('<div>').addClass('card col-md-4 m-2').attr('data-app-id', appId).attr('data-ssh-id', sshId).attr('data-product-id', productId).css({
                     'width': '18rem',
                     'padding': '0px'
                 });
+
+                if (isUnpublished) {
+                    $appCard.addClass('blurred');
+                }
 
                 var $imageSection = $('<div>').addClass('card-img-top position-relative').css('height', '200px').hover(function () {
                     $(this).find('.card-description').fadeIn();
@@ -110,7 +120,7 @@ odoo.define('odoo_infinity_app_store.fetch_repo', function (require) {
         }
 
         $("#apps_submit_repo_button").click(function () {
-        $("#loading_gif").show();
+            $("#loading_gif").show();
             var ssh_url = $("#sshInput").val();
             var sshRegex = /^(ssh:\/\/)([^@]+)@([^\/]+)\/(.+)\.git(#(\d+(\.\d+)?))?$/;
             if (!sshRegex.test(ssh_url)) {
@@ -220,11 +230,35 @@ odoo.define('odoo_infinity_app_store.fetch_repo', function (require) {
                     unpublishButton.toggle();
                 });
 
+                publishButton.click(function (e) {
+                    e.preventDefault();
+                    var listItem = $(this).closest('li');
+                    var sshUrl = listItem.find('.ssh_input').val();
+                    var repoId = listItem.data('repo-id');
+                    console.log("Publish Button Clicked for ", repoId);
+                    ajax.jsonRpc("/publish_repository", 'call', {
+                        repo_id: repoId
+                    }).then(function (response) {
+                        alert("All apps from this repo have been published");
+                    });
+                });
+
+                unpublishButton.click(function (e) {
+                    e.preventDefault();
+                    var listItem = $(this).closest('li');
+                    var sshUrl = listItem.find('.ssh_input').val();
+                    var repoId = listItem.data('repo-id');
+                    ajax.jsonRpc("/unpublish_repository", 'call', {
+                        repo_id: repoId
+                    }).then(function (response) {
+                        alert("All apps from this repo have been unpublished");
+                    });
+                });
+
                 $('#repositories-list').append(listItem);
             });
         });
 
     });
 });
-
 

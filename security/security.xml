@@ -1,41 +1,51 @@
-<?xml version="1.0"?>
 <odoo>
-    <record id="model_category_github" model="ir.module.category">
-        <field name="name">GitHub</field>
-        <field name="description">GitHub users</field>
-        <field name="sequence">1</field>
-    </record>
+    <data noupdate="1">
 
-    <record id="group_github_user" model="res.groups">
-        <field name="name">User</field>
-        <field name="category_id" ref="model_category_github"/>
-    </record>
+        <!-- Admin Group Record Rules -->
+        <record id="rule_ssh_repository_admin" model="ir.rule">
+            <field name="name">SSH Repository Admin Access</field>
+            <field name="model_id" ref="model_ssh_repository"/>
+            <field name="groups" eval="[(4, ref('base.group_system'))]"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
 
-    <record id="group_github_admin" model="res.groups">
-        <field name="name">Admin</field>
-        <field name="category_id" ref="model_category_github"/>
-        <field name="implied_ids" eval="[(4, ref('group_github_user'))]"/>
-    </record>
+        <record id="rule_product_template_admin" model="ir.rule">
+            <field name="name">Product Template Admin Access</field>
+            <field name="model_id" ref="model_product_template"/>
+            <field name="groups" eval="[(4, ref('base.group_system'))]"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
 
-    <!-- Security Rules -->
-    <record id="github_account_user_rule" model="ir.rule">
-        <field name="name">GitHub Account User Rule</field>
-        <field name="model_id" ref="model_github_repository"/>
-        <field name="groups" eval="[(4, ref('group_github_user'))]"/>
-        <field name="perm_read" eval="True"/>
-        <field name="perm_write" eval="False"/>
-        <field name="perm_create" eval="False"/>
-        <field name="perm_unlink" eval="False"/>
-    </record>
+        <!-- Portal User Group Record Rules -->
+        <record id="rule_ssh_repository_portal" model="ir.rule">
+            <field name="name">SSH Repository Portal Full Access</field>
+            <field name="model_id" ref="model_ssh_repository"/>
+            <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
 
-    <record id="github_account_admin_rule" model="ir.rule">
-        <field name="name">GitHub Account Admin Rule</field>
-        <field name="model_id" ref="model_github_repository"/>
-        <field name="groups" eval="[(4, ref('group_github_admin'))]"/>
-        <field name="perm_read" eval="True"/>
-        <field name="perm_write" eval="True"/>
-        <field name="perm_create" eval="True"/>
-        <field name="perm_unlink" eval="True"/>
-    </record>
+        <record id="rule_product_template_portal" model="ir.rule">
+            <field name="name">Product Template Portal Access</field>
+            <field name="model_id" ref="model_product_template"/>
+            <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="domain_force">[('ssh_repository_id.user_id', '=', user.id)]</field>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
 
+    </data>
 </odoo>
